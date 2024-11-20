@@ -9,6 +9,7 @@ The MaxEdit is a modern, web-based editor designed for effortless Markdown editi
 - **Word Count Tracker:** Keep track of your word count dynamically as you type.
 - **Theme Toggle:** Switch between light and dark themes to suit your preference.
 - **Copy HTML Output:** Easily copy the rendered HTML content to the clipboard.
+- **MaxEdit** is **Live** at **[Github.io](https://adityasinh-sodha.github.io/MaxEdit/)** and **[Codepen.io](https://codepen.io/Adityasinh/full/vYowzNP).**
 
 
 ## Technologies Used
