@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Markdown Editor</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
+</head>
+<body>
+    <div class="editor-container">
+        <textarea id="markdown-input" placeholder="Write your Markdown here..."></textarea>
+        <div id="preview"></div>
+    </div>
+    <div class="toolbar">
+        <button id="copy-btn">Copy HTML</button>
+        <button id="theme-btn">Toggle Theme</button>
+        <div id="word-count">Word Count: 0</div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
