@@ -1,4 +1,5 @@
 # MaxEdit
+![themes](https://github.com/user-attachments/assets/c392d1ce-45d8-4eaa-8be6-551cbef1b96d)
 
 The MaxEdit is a modern, web-based editor designed for effortless Markdown editing and live previewing. It's perfect for developers, writers, and anyone who frequently works with Markdown.
 
