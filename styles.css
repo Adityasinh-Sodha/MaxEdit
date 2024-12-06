@@ -28,8 +28,6 @@ body {
 }
 
 
-
-
 textarea {
     width: 50%;
     height: 100%;
@@ -42,6 +40,24 @@ textarea {
     font-family: 'Courier New', Courier, monospace;
     backdrop-filter: blur(10px); 
     background: rgba(255, 255, 255, 0.8);
+    white-space: pre-wrap; 
+    overflow-wrap: break-word; 
+}
+
+    textarea:focus {
+    outline: none; 
+}
+
+pre[class*="language-"] {
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+
+body.dark-theme pre[class*="language-"] {
+    background: #444;
+    color: #fff;
 }
 
 #preview {
@@ -198,4 +214,44 @@ button:hover {
 .dark-theme #preview {
     backdrop-filter: blur(10px);
     background: rgba(68, 68, 68, 0.8);
+}
+
+#markdown-input {
+    width: 50%;
+    height: 100%;
+    padding: 20px;
+    font-size: 16px;
+    font-family: 'Courier New', Courier, monospace;
+    white-space: pre-wrap; 
+    overflow-wrap: break-word; 
+    overflow-y: auto; 
+    border: none;
+    outline: none;
+    resize: none;
+    color: #333;
+    background: rgba(255, 255, 255, 0.8);
+    box-sizing: border-box; 
+}
+
+#markdown-input:empty:before {
+    content: attr(placeholder);
+    color: #aaa;
+    pointer-events: none;
+}
+
+body.dark-theme #markdown-input {
+    color: #fff;
+    background: rgba(68, 68, 68, 0.8);
+}
+        
+
+pre[class*="language-"] {
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+body.dark-theme pre[class*="language-"] {
+    background: #444;
+    color: #fff;
 }
