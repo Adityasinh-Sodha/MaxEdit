@@ -14,12 +14,26 @@ marked.setOptions({
 });
 
 markdownInput.addEventListener('input', () => {
-    const markdownText = markdownInput.value;
+    const markdownText = markdownInput.innerText; // Get raw Markdown text
     const sanitizedHTML = DOMPurify.sanitize(marked.parse(markdownText));
     preview.innerHTML = sanitizedHTML;
 
+    preview.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightElement(block);
+    });
+
+    const highlightedContent = Prism.highlight(markdownText, Prism.languages.markdown, 'markdown');
+    markdownInput.innerHTML = highlightedContent;
+
+    const range = document.createRange();
+    const sel = window.getSelection();
+    range.selectNodeContents(markdownInput);
+    range.collapse(false);
+    sel.removeAllRanges();
+    sel.addRange(range);
+
     const wordCount = markdownText.trim() ? markdownText.trim().split(/\s+/).length : 0;
-wordCountDiv.textContent = `Word Count: ${wordCount}`;
+    wordCountDiv.textContent = `Word Count: ${wordCount}`;
 });
 
 copyBtn.addEventListener('click', () => {
