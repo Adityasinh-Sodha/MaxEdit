@@ -51,18 +51,20 @@ body {
 .toolbar-center {
     position: absolute;
     left: 50%; 
-    transform: translateX(-50%); 
+    transform: translateX(-50%);
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    gap: 2px; 
 }
 
 .toolbar-logo {
-    height: 30px;   
-    margin: 0 10px;
+    height: 30px; 
+    width: auto; 
+    margin: 0 5px; 
     cursor: pointer;
 }
+
 
 .toolbar-link {
     color: #fff;
@@ -75,9 +77,12 @@ body {
     text-decoration: underline;
 }
 
+
 body {
     padding-top: 60px;
 }
+
+
 
 textarea {
     width: 50%;
