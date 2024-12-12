@@ -27,7 +27,6 @@ body {
     overflow: hidden;
 }
 
-
 /* Top Toolbar Styles */
 .top-toolbar {
     display: flex;
@@ -48,6 +47,12 @@ body {
     align-items: center;
 }
 
+.toolbar-right {
+    position: relative; /* For positioning the dropdown menu */
+    display: flex;
+    align-items: center;
+}
+
 .toolbar-center {
     position: absolute;
     left: 50%; 
@@ -56,6 +61,53 @@ body {
     justify-content: center;
     align-items: center;
     gap: 2px; 
+}
+
+#gear-btn {
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+#settings-menu {
+    position: absolute;
+    top: 40px; 
+    right: 0; 
+    background-color: #000000;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 5px;
+    padding: 10px;
+    display: none; /* Initially hidden */
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+
+#settings-menu button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100%; /* Full width inside dropdown */
+}
+
+#settings-menu button:hover {
+    background-color: #0056b3;
+}
+
+.hidden {
+    display: none;
+}
+
+#settings-menu.active {
+    display: flex; /* Show the dropdown menu */
 }
 
 .toolbar-logo {
@@ -189,25 +241,6 @@ body.dark-theme pre[class*="language-"] {
     top: -30px;
 }
 
-
-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-#word-count {
-    font-size: 16px;
-    color: inherit;
-}
 
 .dark-theme {
     background-color: #333;
