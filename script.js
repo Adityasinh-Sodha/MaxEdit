@@ -3,6 +3,12 @@ const preview = document.getElementById('preview');
 const copyBtn = document.getElementById('copy-btn');
 const themeBtn = document.getElementById('theme-btn');
 const wordCountDiv = document.getElementById('word-count');
+const gearBtn = document.getElementById('gear-btn');
+const settingsMenu = document.getElementById('settings-menu');
+
+gearBtn.addEventListener('click', () => {
+    settingsMenu.classList.toggle('active');
+});
 
 marked.setOptions({
     breaks: true,
