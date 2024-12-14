@@ -17,6 +17,12 @@ The MaxEdit is a modern, web-based editor designed for effortless Markdown editi
 - Just Simple **HTML5, CSS and JS**
 - **[Marked.js](https://github.com/markedjs/marked)** For Markdown parsing.
 - **[DOMPurify](https://github.com/cure53/DOMPurify)** For sanitizing HTML output.
+- **[Highlight.js](https://github.com/highlightjs/highlight.js)** For syntax highlighting in code blocks.
+- **[Prism.js](https://github.com/PrismJS/prism)** For lightweight, customizable code syntax highlighting.
+- **[Prism Markdown Component](https://github.com/PrismJS/prism)** Adds Markdown language support to Prism.js.
+- **[GitHub Dark Theme](https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css)** Highlight.js GitHub Dark theme for code styling.
+- **[Prism.css Theme](https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css)** Prism.js default theme for code block styling.
+
 
 ## License
 
