@@ -27,3 +27,6 @@ The MaxEdit is a modern, web-based editor designed for effortless Markdown editi
 ## License
 
  This project is licensed under the MIT License. See the LICENSE file for details.
+
+## Author
+Developed by **Adityasinh**.
