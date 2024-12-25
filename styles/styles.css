@@ -23,7 +23,33 @@ body {
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
     border-radius: 12px;
     overflow: hidden;
+    resize: both; /* Allow resizing */
+    overflow: auto; /* Prevent content from overflowing */
 }
+
+
+#markdown-input,
+#preview {
+    width: 50%; /* Initial split width */
+    height: 100%;
+    padding: 20px;
+    font-size: 16px;
+    font-family: 'Courier New', Courier, monospace;
+    white-space: pre-wrap; 
+    overflow-wrap: break-word; 
+    overflow-y: auto;
+    border: none;
+    outline: none;
+    resize: none; /* Prevent internal resizing */
+    box-sizing: border-box; 
+}
+
+
+.editor-container.resizing #markdown-input,
+.editor-container.resizing #preview {
+    pointer-events: none; /* Disable text selection while resizing */
+}
+
 
 /* Top Toolbar Styles */
 .top-toolbar {
@@ -302,22 +328,7 @@ body.dark-theme pre[class*="language-"] {
     background: rgba(68, 68, 68, 0.8);
 }
 
-#markdown-input {
-    width: 50%;
-    height: 100%;
-    padding: 20px;
-    font-size: 16px;
-    font-family: 'Courier New', Courier, monospace;
-    white-space: pre-wrap; 
-    overflow-wrap: break-word; 
-    overflow-y: auto; 
-    border: none;
-    outline: none;
-    resize: none;
-    background: #e0e0e0; 
-    color: #333;
-    box-sizing: border-box; 
-}
+
 
 #markdown-input:empty:before {
     content: attr(placeholder);
