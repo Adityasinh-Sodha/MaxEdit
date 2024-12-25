@@ -18,8 +18,6 @@ body {
     max-width: 1200px;
     height: 70vh;
     margin: auto;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px); 
     background: rgba(255, 255, 255, 0.1); 
     border: 1px solid rgba(255, 255, 255, 0.2); 
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
@@ -146,7 +144,6 @@ textarea {
     resize: none;
     border-right: 1px solid #ddd;
     font-family: 'Courier New', Courier, monospace;
-    backdrop-filter: blur(10px); 
     background: rgba(255, 255, 255, 0.8);
     white-space: pre-wrap; 
     overflow-wrap: break-word; 
@@ -176,7 +173,8 @@ body.dark-theme pre[class*="language-"] {
     font-size: 16px;
     background: rgba(250, 250, 250, 0.8); 
     line-height: 1.6;
-    backdrop-filter: blur(10px); 
+    background: #e0e0e0; /* Light grey background for the preview panel */
+    color: #333;
 }
 
 
@@ -301,7 +299,6 @@ body.dark-theme pre[class*="language-"] {
 
 .dark-theme textarea,
 .dark-theme #preview {
-    backdrop-filter: blur(10px);
     background: rgba(68, 68, 68, 0.8);
 }
 
@@ -317,8 +314,8 @@ body.dark-theme pre[class*="language-"] {
     border: none;
     outline: none;
     resize: none;
+    background: #e0e0e0; 
     color: #333;
-    background: rgba(255, 255, 255, 0.8);
     box-sizing: border-box; 
 }
 
@@ -328,9 +325,11 @@ body.dark-theme pre[class*="language-"] {
     pointer-events: none;
 }
 
-body.dark-theme #markdown-input {
-    color: #fff;
-    background: rgba(68, 68, 68, 0.8);
+
+body.dark-theme #markdown-input,
+body.dark-theme #preview {
+    background: #555; 
+    color: #fff; 
 }
         
 
