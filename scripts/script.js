@@ -119,6 +119,19 @@ copyBtn.addEventListener('click', () => {
     });
 });
 
-themeBtn.addEventListener('click', () => {
-    document.body.classList.toggle('dark-theme');
+const themeSelector = document.getElementById('theme-selector');
+
+document.body.classList.add('dark-blue-theme');
+
+themeSelector.value = 'dark-blue-theme';
+
+themeSelector.addEventListener('change', (e) => {
+    const selectedTheme = e.target.value;
+
+    document.body.className = '';
+    
+    if (selectedTheme !== 'default') {
+        document.body.classList.add(selectedTheme);
+    }
 });
+
