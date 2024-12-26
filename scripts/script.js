@@ -35,17 +35,22 @@ window.addEventListener('mouseup', () => {
 
 
 
-gearBtn.addEventListener('click', () => {
-    settingsMenu.classList.toggle('active');
+document.addEventListener("DOMContentLoaded", () => {
+    const gearBtn = document.getElementById("gear-btn");
+    const settingsMenu = document.getElementById("settings-menu");
+
+    gearBtn.addEventListener("click", () => {
+        settingsMenu.classList.toggle("active");
+    });
+
+    // Close settings menu when clicking outside
+    document.addEventListener("click", (e) => {
+        if (!gearBtn.contains(e.target) && !settingsMenu.contains(e.target)) {
+            settingsMenu.classList.remove("active");
+        }
+    });
 });
-marked.setOptions({
-    breaks: true,
-    gfm: true,
-    tables: true,
-    highlight: function (code, lang) {
-        return lang ? hljs.highlight(code, { language: lang }).value : code;
-    },
-});
+
 function saveCaretPosition(el) {
     const selection = window.getSelection();
     const range = selection.getRangeAt(0);
@@ -141,4 +146,67 @@ themeSelector.addEventListener('change', (e) => {
     if (selectedTheme !== 'default') {
         document.body.classList.add(selectedTheme);
     }
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const editorContainer = document.querySelector(".editor-container");
+    const markdownInput = document.getElementById("markdown-input");
+    const preview = document.getElementById("preview");
+    const toolbar = document.querySelector(".top-toolbar");
+    const toolbarRight = toolbar.querySelector(".toolbar-right");
+
+    // Create the toggle button
+    const toggleBtn = document.createElement("button");
+    toggleBtn.id = "toggle-btn";
+    toggleBtn.textContent = "Maximize";
+    toolbarRight.appendChild(toggleBtn);
+
+    let isMaximized = false;
+
+    toggleBtn.addEventListener("click", () => {
+        if (!isMaximized) {
+            // Maximize
+            const toolbarHeight = toolbar.offsetHeight;
+
+            editorContainer.style.position = "fixed";
+            editorContainer.style.top = `${toolbarHeight}px`;
+            editorContainer.style.left = "0";
+            editorContainer.style.width = "100vw";
+            editorContainer.style.height = `calc(100vh - ${toolbarHeight}px)`;
+            editorContainer.style.margin = "0";
+            editorContainer.style.padding = "0";
+            editorContainer.style.zIndex = "1000";
+
+            markdownInput.style.width = "50%";
+            preview.style.width = "50%";
+
+            markdownInput.style.height = "100%";
+            preview.style.height = "100%";
+
+            document.body.style.overflow = "hidden"; // Prevent background scrolling
+
+            toggleBtn.textContent = "manual";
+            isMaximized = true;
+        } else {
+            // Minimize
+            editorContainer.style.position = "relative";
+            editorContainer.style.width = "60%"; // 60% of parent width for center alignment
+            editorContainer.style.height = "70%"; // 70% of parent height
+            editorContainer.style.margin = "auto";
+            editorContainer.style.padding = "20px";
+            editorContainer.style.zIndex = "";
+
+            markdownInput.style.width = "50%";
+            preview.style.width = "50%";
+
+            markdownInput.style.height = "100%";
+            preview.style.height = "100%";
+
+            document.body.style.overflow = ""; // Re-enable background scrolling
+
+            toggleBtn.textContent = "Maximize";
+            isMaximized = false;
+        }
+    });
 });
