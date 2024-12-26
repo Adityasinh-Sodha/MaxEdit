@@ -11,20 +11,103 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
+.editor-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.editor-controls button {
+    padding: 5px 15px;
+    font-size: 14px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.editor-controls button:hover {
+    background-color: #0056b3;
+}
+
+.editor-container.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    z-index: 1000;
+    display: flex;
+    background-color: #fff; /* Optional: Override if needed */
+}
+
+.editor-container.fullscreen #markdown-input,
+.editor-container.fullscreen #preview {
+    width: 50%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+}
+
+
+.toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+#toggle-btn {
+    padding: 5px 15px;
+    font-size: 14px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    order: 2; /* Ensure it appears after the gear button */
+}
+
+#toggle-btn:hover {
+    background-color: #0056b3;
+}
+
+.editor-container.minimized {
+    width: 90%;
+    height: calc(50% - 20px);
+    margin: 20px auto;
+    padding: 0;
+    display: flex;
+}
+
+.editor-container.minimized #markdown-input,
+.editor-container.minimized #preview {
+    width: 50%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+}
 
 .editor-container {
+    position: relative;
     display: flex;
-    width: 90%;
-    max-width: 1200px;
-    height: 70vh;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease; /* Smooth transitions */
     margin: auto;
-    background: rgba(255, 255, 255, 0.1); 
-    border: 1px solid rgba(255, 255, 255, 0.2); 
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
     border-radius: 12px;
-    overflow: hidden;
-    resize: both; /* Allow resizing */
-    overflow: auto; /* Prevent content from overflowing */
+    z-index: 1000;
 }
 
 
@@ -59,10 +142,10 @@ body {
     background-color: #000;
     color: #fff;
     padding: 10px 20px;
-    position: fixed;
+    position: relative;
     top: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 2000;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
@@ -92,6 +175,7 @@ body {
     width: 30px;
     cursor: pointer;
     margin-left: 10px;
+     order: 1;
 }
 
 #settings-menu {
@@ -107,9 +191,8 @@ body {
     flex-direction: column;
     gap: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
+    z-index: 3000; /* Ensure dropdown is above everything */
 }
-
 
 #settings-menu button {
     background-color: #007bff;
