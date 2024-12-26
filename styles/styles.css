@@ -443,3 +443,11 @@ body.dark-blue-theme #preview {
     background: #1a1f36; 
     color: #cfd8e3;
 }
+
+.divider {
+    width: 2px; 
+    background-color: #ffffff; 
+    height: 100%; 
+    border: none; 
+    opacity: 1; 
+}
