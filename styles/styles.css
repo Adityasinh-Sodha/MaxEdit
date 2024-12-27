@@ -473,9 +473,17 @@ body.dark-blue-theme #preview {
 
 .divider {
     width: 2px; 
-    background-color: #ffffff; 
     height: 100%; 
     border: none; 
     opacity: 1; 
 }
 
+
+body:not(.dark-theme) .divider {
+    background-color: #ddd; 
+}
+
+
+body.dark-theme .divider {
+    background-color: #ffffff; 
+}
