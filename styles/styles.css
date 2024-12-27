@@ -9,6 +9,8 @@ body {
     background: url('../assets/background.png') no-repeat center center/cover;
     color: #333;
     transition: background-color 0.3s, color 0.3s;
+    overflow: hidden;
+    padding-top: 60px;
 }
 
 .editor-controls {
@@ -43,7 +45,7 @@ body {
     padding: 0;
     z-index: 1000;
     display: flex;
-    background-color: #fff; /* Optional: Override if needed */
+    background-color: #fff; 
 }
 
 .editor-container.fullscreen #markdown-input,
@@ -72,7 +74,7 @@ body {
     color: white;
     cursor: pointer;
     transition: background-color 0.3s;
-    order: 2; /* Ensure it appears after the gear button */
+    order: 1; 
 }
 
 #toggle-btn:hover {
@@ -93,7 +95,7 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow: auto;
+    overflow: auto; 
 }
 
 .editor-container {
@@ -101,7 +103,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.3s ease; /* Smooth transitions */
+    transition: all 0.3s ease;
     margin: auto;
     padding: 20px;
     background: rgba(255, 255, 255, 0.1);
@@ -113,7 +115,7 @@ body {
 
 #markdown-input,
 #preview {
-    width: 50%; /* Initial split width */
+    width: 50%; 
     height: 100%;
     padding: 20px;
     font-size: 16px;
@@ -123,31 +125,37 @@ body {
     overflow-y: auto;
     border: none;
     outline: none;
-    resize: none; /* Prevent internal resizing */
+    resize: none; 
     box-sizing: border-box; 
 }
 
 
 .editor-container.resizing #markdown-input,
 .editor-container.resizing #preview {
-    pointer-events: none; /* Disable text selection while resizing */
+    pointer-events: none; 
 }
 
-
-/* Top Toolbar Styles */
 .top-toolbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    z-index: 2000;
     background-color: #000;
     color: #fff;
-    padding: 10px 20px;
-    position: relative;
-    top: 0;
-    width: 100%;
-    z-index: 2000;
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 0 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
+
+.top-toolbar > * {
+    margin: 0;
+    padding: 0; 
+}
+
 
 .toolbar-left {
     display: flex;
@@ -155,28 +163,38 @@ body {
 }
 
 .toolbar-right {
+    margin-left: auto;
     position: relative; 
     display: flex;
     align-items: center;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-right: 20px;
 }
 
 .toolbar-center {
     position: absolute;
     left: 50%; 
-    transform: translateX(-50%);
+    transform: translateX(-66%);
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 2px; 
+    gap: 2px;
+    margin: 0 auto;
+    flex: 1;
 }
 
 #gear-btn {
     height: 30px;
-    width: 30px;
     cursor: pointer;
-    margin-left: 10px;
-     order: 1;
+    order: 2;
 }
+
+#toggle-btn:hover,
+#gear-btn:hover {
+    background-color: #0056b3;
+}
+
 
 #settings-menu {
     position: absolute;
@@ -191,7 +209,7 @@ body {
     flex-direction: column;
     gap: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 3000; /* Ensure dropdown is above everything */
+    z-index: 3000; 
 }
 
 #settings-menu button {
@@ -222,6 +240,7 @@ body {
     width: auto; 
     margin: 0 5px; 
     cursor: pointer;
+    line-height: 30px;
 }
 
 
