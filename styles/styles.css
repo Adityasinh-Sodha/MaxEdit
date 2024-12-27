@@ -48,6 +48,12 @@ body {
     background-color: #fff; 
 }
 
+#markdown-input {
+    background-color: #ffffff; 
+    color: #333; 
+}
+
+
 .editor-container.fullscreen #markdown-input,
 .editor-container.fullscreen #preview {
     width: 50%;
@@ -103,7 +109,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease; 
     margin: auto;
     padding: 20px;
     background: rgba(255, 255, 255, 0.1);
@@ -125,8 +131,8 @@ body {
     overflow-y: auto;
     border: none;
     outline: none;
-    resize: none; 
-    box-sizing: border-box; 
+    resize: none;
+    box-sizing: border-box;
 }
 
 
@@ -134,6 +140,8 @@ body {
 .editor-container.resizing #preview {
     pointer-events: none; 
 }
+
+
 
 .top-toolbar {
     position: fixed;
@@ -152,7 +160,7 @@ body {
 }
 
 .top-toolbar > * {
-    margin: 0;
+    margin: 0; 
     padding: 0; 
 }
 
@@ -301,7 +309,7 @@ body.dark-theme pre[class*="language-"] {
     font-size: 16px;
     background: rgba(250, 250, 250, 0.8); 
     line-height: 1.6;
-    background: #e0e0e0; 
+    background: #ffffff; 
     color: #333;
 }
 
@@ -470,3 +478,4 @@ body.dark-blue-theme #preview {
     border: none; 
     opacity: 1; 
 }
+
