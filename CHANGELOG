@@ -1,0 +1,44 @@
+title: MaxEdit v1
+author: [Adityasinh Sodha]
+
+changes:
+  added:
+    - Real-time syntax highlighting using Prism.js for the editor.
+    - Highlight.js integration for code blocks in the preview pane.
+    - Live Markdown preview with support for tables, headers, lists, and inline code.
+    - Word count tracker to display real-time word count.
+    - Copy button to copy rendered HTML to the clipboard.
+    - Theme toggle functionality for switching between dark and light modes.
+
+  fixed:
+    - Optimized performance for large Markdown files.
+    - Improved dark mode rendering for consistency across the editor and preview.
+
+  known_issues:
+    - Slight delay in re-highlighting for large documents.
+    - Blur effect causing delay in keyboard input. 
+    - Limited theme customization options (planned for future updates).
+
+title: Maxedit v1.5
+author: [Adityasinh Sodha]
+
+changes:
+  added:
+    - Add a Divider between Editor and Previewer.
+    - Add button for Maximize and minimize editor.
+    - Add New Theme 'Dark Blue' and set it default.
+    - Make degine responsive and optimized for various screen sizes.
+    - Move Word Count, Theme changer and Copy HTML Button to the Toolbar's Setting Menu.
+
+  fixed:
+    - Fix Top Toolbar Position.
+    - Fix Gear Button Dropdown Issue.
+    - Fix Transparency Issue in the White Theme.
+    - Fix Cursor Jumping Issue.
+    - Fix almost all syntax problems.
+    - Fix delay in keyboard input by removing blur effect
+  
+  known_issues:
+    - Enter key did not insert a proper new line and disrupted the layout.
+    - In Dark Blue theme table heading and code blocks appear white causing visibility Issue.
+    - All items are not together.
