@@ -8,7 +8,7 @@ const settingsMenu = document.getElementById('settings-menu');
 const editorContainer = document.querySelector('.editor-container');
 let isResizing = false;
 
-// Handle resize events to update content dynamically
+
 editorContainer.addEventListener('mousedown', (e) => {
     if (e.target === editorContainer) {
         isResizing = true;
@@ -20,7 +20,7 @@ window.addEventListener('mousemove', (e) => {
     if (isResizing) {
         const containerRect = editorContainer.getBoundingClientRect();
 
-        // Update width and height based on mouse position
+       
         editorContainer.style.width = `${e.clientX - containerRect.left}px`;
         editorContainer.style.height = `${e.clientY - containerRect.top}px`;
     }
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
         settingsMenu.classList.toggle("active");
     });
 
-    // Close settings menu when clicking outside
+   
     document.addEventListener("click", (e) => {
         if (!gearBtn.contains(e.target) && !settingsMenu.contains(e.target)) {
             settingsMenu.classList.remove("active");
@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const toolbar = document.querySelector(".top-toolbar");
     const toolbarRight = toolbar.querySelector(".toolbar-right");
 
-    // Create the toggle button
+    
     const toggleBtn = document.createElement("button");
     toggleBtn.id = "toggle-btn";
     toggleBtn.textContent = "Maximize";
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     toggleBtn.addEventListener("click", () => {
         if (!isMaximized) {
-            // Maximize
+           
             const toolbarHeight = toolbar.offsetHeight;
 
             editorContainer.style.position = "fixed";
@@ -184,15 +184,15 @@ document.addEventListener("DOMContentLoaded", () => {
             markdownInput.style.height = "100%";
             preview.style.height = "100%";
 
-            document.body.style.overflow = "hidden"; // Prevent background scrolling
+            document.body.style.overflow = "hidden"; 
 
             toggleBtn.textContent = "manual";
             isMaximized = true;
         } else {
-            // Minimize
+            
             editorContainer.style.position = "relative";
-            editorContainer.style.width = "60%"; // 60% of parent width for center alignment
-            editorContainer.style.height = "70%"; // 70% of parent height
+            editorContainer.style.width = "60%"; 
+            editorContainer.style.height = "70%"; 
             editorContainer.style.margin = "auto";
             editorContainer.style.padding = "20px";
             editorContainer.style.zIndex = "";
@@ -203,7 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
             markdownInput.style.height = "100%";
             preview.style.height = "100%";
 
-            document.body.style.overflow = ""; // Re-enable background scrolling
+            document.body.style.overflow = "";
 
             toggleBtn.textContent = "Maximize";
             isMaximized = false;
