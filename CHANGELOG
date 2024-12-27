@@ -27,6 +27,7 @@ date: 27-Dec 2024
 changes:
   added:
     - Add a Divider between Editor and Previewer.
+    - Add option for resizing editor by dragging it. 
     - Add button for Maximize and minimize editor.
     - Add New Theme 'Dark Blue' and set it default.
     - Make degine responsive and optimized for various screen sizes.
