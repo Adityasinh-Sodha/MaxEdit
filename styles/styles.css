@@ -377,8 +377,8 @@ body.dark-theme pre[class*="language-"] {
 
 
 .dark-theme {
-    background-color: #333;
-    color: #fff;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
 }
 
 .dark-theme textarea,
@@ -449,8 +449,8 @@ body.dark-theme pre[class*="language-"] {
 
 body.dark-theme #markdown-input,
 body.dark-theme #preview {
-    background: #555; 
-    color: #fff; 
+    background-color: #2b2b2b; 
+    color: #f0f0f0;
 }
         
 
@@ -486,4 +486,22 @@ body:not(.dark-theme) .divider {
 
 body.dark-theme .divider {
     background-color: #ffffff; 
+}
+
+body.dark-blue-theme #preview th {
+    background-color: #1a2b4f; 
+    color: #cfd8e3; 
+}
+
+body.dark-blue-theme #preview td {
+    background-color: #243b5c; 
+    color: #cfd8e3; 
+}
+
+/* Code Blocks */
+body.dark-blue-theme #preview pre {
+    background-color: #2e2e3e;
+    color: #cfd8e3; 
+    border-radius: 5px; 
+    padding: 10px; 
 }
