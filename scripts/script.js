@@ -20,7 +20,7 @@ window.addEventListener('mousemove', (e) => {
     if (isResizing) {
         const containerRect = editorContainer.getBoundingClientRect();
 
-       
+        // Update width and height based on mouse position
         editorContainer.style.width = `${e.clientX - containerRect.left}px`;
         editorContainer.style.height = `${e.clientY - containerRect.top}px`;
     }
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
         settingsMenu.classList.toggle("active");
     });
 
-   
+    // Close settings menu when clicking outside
     document.addEventListener("click", (e) => {
         if (!gearBtn.contains(e.target) && !settingsMenu.contains(e.target)) {
             settingsMenu.classList.remove("active");
@@ -154,45 +154,51 @@ document.addEventListener("DOMContentLoaded", () => {
     const markdownInput = document.getElementById("markdown-input");
     const preview = document.getElementById("preview");
     const toolbar = document.querySelector(".top-toolbar");
-    const toolbarRight = toolbar.querySelector(".toolbar-right");
+    let toggleBtn = document.getElementById("toggle-btn");
 
     
-    const toggleBtn = document.createElement("button");
-    toggleBtn.id = "toggle-btn";
-    toggleBtn.textContent = "Maximize";
-    toolbarRight.appendChild(toggleBtn);
+    if (!toggleBtn) {
+        toggleBtn = document.createElement("button");
+        toggleBtn.id = "toggle-btn";
+        toggleBtn.textContent = "Minimize"; 
+        toggleBtn.style.marginLeft = "10px"; 
+        toolbar.querySelector(".toolbar-right").appendChild(toggleBtn);
+    }
 
-    let isMaximized = false;
+    const toolbarHeight = toolbar.offsetHeight;
 
+    function maximizeEditor() {
+        editorContainer.style.position = "fixed";
+        editorContainer.style.top = `${toolbarHeight}px`;
+        editorContainer.style.left = "0";
+        editorContainer.style.width = "100vw";
+        editorContainer.style.height = `calc(100vh - ${toolbarHeight}px)`;
+        editorContainer.style.margin = "0";
+        editorContainer.style.padding = "0";
+        editorContainer.style.zIndex = "1000";
+
+        markdownInput.style.width = "50%";
+        preview.style.width = "50%";
+
+        markdownInput.style.height = "100%";
+        preview.style.height = "100%";
+
+        document.body.style.overflow = "hidden"; 
+        toggleBtn.textContent = "Minimize"; "
+    }
+
+    
+    maximizeEditor();
+
+   
     toggleBtn.addEventListener("click", () => {
-        if (!isMaximized) {
-           
-            const toolbarHeight = toolbar.offsetHeight;
+        const isMaximized = toggleBtn.textContent === "Minimize";
 
-            editorContainer.style.position = "fixed";
-            editorContainer.style.top = `${toolbarHeight}px`;
-            editorContainer.style.left = "0";
-            editorContainer.style.width = "100vw";
-            editorContainer.style.height = `calc(100vh - ${toolbarHeight}px)`;
-            editorContainer.style.margin = "0";
-            editorContainer.style.padding = "0";
-            editorContainer.style.zIndex = "1000";
-
-            markdownInput.style.width = "50%";
-            preview.style.width = "50%";
-
-            markdownInput.style.height = "100%";
-            preview.style.height = "100%";
-
-            document.body.style.overflow = "hidden"; 
-
-            toggleBtn.textContent = "manual";
-            isMaximized = true;
-        } else {
+        if (isMaximized) {
             
             editorContainer.style.position = "relative";
             editorContainer.style.width = "60%"; 
-            editorContainer.style.height = "70%"; 
+            editorContainer.style.height = "70%";
             editorContainer.style.margin = "auto";
             editorContainer.style.padding = "20px";
             editorContainer.style.zIndex = "";
@@ -203,10 +209,10 @@ document.addEventListener("DOMContentLoaded", () => {
             markdownInput.style.height = "100%";
             preview.style.height = "100%";
 
-            document.body.style.overflow = "";
-
+            document.body.style.overflow = ""; 
             toggleBtn.textContent = "Maximize";
-            isMaximized = false;
+        } else {
+            maximizeEditor(); 
         }
     });
 });
