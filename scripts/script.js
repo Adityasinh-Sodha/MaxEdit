@@ -8,7 +8,6 @@ const settingsMenu = document.getElementById('settings-menu');
 const editorContainer = document.querySelector('.editor-container');
 let isResizing = false;
 
-
 editorContainer.addEventListener('mousedown', (e) => {
     if (e.target === editorContainer) {
         isResizing = true;
@@ -150,13 +149,133 @@ themeSelector.addEventListener('change', (e) => {
 
 
 document.addEventListener("DOMContentLoaded", () => {
+    const markdownInput = document.getElementById("markdown-input");
+    const preview = document.getElementById("preview");
+
+    // Sample Markdown code
+    const sampleMarkdown = `
+# MaxEdit
+
+# H1 Header
+## H2 Header
+### H3 Header
+#### H4 Header
+##### H5 Header
+###### H6 Header
+
+## Emphasis
+
+*Italic text using asterisks*
+
+_Italic text using underscores_
+
+**Bold text using double asterisks**
+
+__Bold text using double underscores__
+
+***Bold and italic text using triple asterisks***
+
+___Bold and italic text using triple underscores___
+
+## Lists
+
+### Unordered List
+
+- Item 1
+  - Subitem 1.1
+  - Subitem 1.2
+- Item 2
+
+### Ordered List
+
+1. First item
+2. Second item
+   1. Subitem 2.1
+   2. Subitem 2.2
+
+## Links
+
+You are using [MaxEdit](https://adityasinh-sodha.github.io/MaxEdit/) by [Adityasinh](https://bento.me/adityasinh)
+
+## Images
+
+![maxedit](https://simgbb.com/avatar/RT7C7DzzyZ2h.png) 
+
+## Blockquotes
+
+> This is a blockquote.
+>
+> Another line in the blockquote.
+
+
+## Tables
+
+| Column 1 | Column 2 | Column 3 |
+|----------|----------|----------|
+| Row 1    | Data 1.2 | Data 1.3 |
+| Row 2    | Data 2.2 | Data 2.3 |
+
+## Task Lists
+
+- [x] Task 1
+- [ ] Task 2
+- [ ] Task 3
+
+
+## Strikethrough
+
+~~This text is strikethrough.~~
+
+## Custom Syntax Highlighting
+
+
+
+## Author
+Developed by **Adityasinh**.
+    `;
+
+    const updatePreview = () => {
+        const markdownContent = markdownInput.innerText.trim();
+        if (markdownContent === "") {
+            preview.innerHTML = "";
+        } else {
+            const sanitizedHTML = DOMPurify.sanitize(marked.parse(markdownContent));
+            preview.innerHTML = sanitizedHTML;
+
+            preview.querySelectorAll("pre code").forEach((block) => {
+                Prism.highlightElement(block);
+            });
+        }
+    };
+
+    markdownInput.innerText = sampleMarkdown;
+
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = Prism.highlight(sampleMarkdown, Prism.languages.markdown, "markdown");
+    markdownInput.innerHTML = tempDiv.innerHTML;
+
+    const observer = new MutationObserver(() => {
+        updatePreview();
+    });
+
+    observer.observe(markdownInput, {
+        childList: true,
+        subtree: true,
+        characterData: true,
+    });
+
+    updatePreview();
+});
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
     const editorContainer = document.querySelector(".editor-container");
     const markdownInput = document.getElementById("markdown-input");
     const preview = document.getElementById("preview");
     const toolbar = document.querySelector(".top-toolbar");
     let toggleBtn = document.getElementById("toggle-btn");
 
-    
     if (!toggleBtn) {
         toggleBtn = document.createElement("button");
         toggleBtn.id = "toggle-btn";
@@ -184,18 +303,16 @@ document.addEventListener("DOMContentLoaded", () => {
         preview.style.height = "100%";
 
         document.body.style.overflow = "hidden"; 
-        toggleBtn.textContent = "Minimize"; "
+        toggleBtn.textContent = "Minimize"; 
     }
 
-    
     maximizeEditor();
 
-   
     toggleBtn.addEventListener("click", () => {
         const isMaximized = toggleBtn.textContent === "Minimize";
 
         if (isMaximized) {
-            
+            // Minimize logic
             editorContainer.style.position = "relative";
             editorContainer.style.width = "60%"; 
             editorContainer.style.height = "70%";
