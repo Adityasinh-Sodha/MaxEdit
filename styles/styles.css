@@ -79,6 +79,7 @@ body {
     background-color: #007bff;
     color: white;
     cursor: pointer;
+    font-weight: bold;
     transition: background-color 0.3s;
     order: 1; 
 }
@@ -86,6 +87,23 @@ body {
 #toggle-btn:hover {
     background-color: #0056b3;
 }
+
+.btn-reset {
+    background-color: #007bff !important; 
+    color: #fff !important; 
+    border: none !important;
+    border-radius: 4px !important;
+    padding: 5px 10px !important;
+    cursor: pointer !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    transition: background-color 0.3s ease !important;
+}
+
+.btn-reset:hover {
+    background-color: #0056b3 !important; 
+}
+
 
 .editor-container.minimized {
     width: 90%;
@@ -472,10 +490,12 @@ body.dark-blue-theme #preview {
 }
 
 .divider {
-    width: 2px; 
+    width: 4px; 
     height: 100%; 
     border: none; 
-    opacity: 1; 
+    opacity: 1;
+    cursor: ew-resize;
+     background-color: #ccc; 
 }
 
 
@@ -505,3 +525,4 @@ body.dark-blue-theme #preview pre {
     border-radius: 5px; 
     padding: 10px; 
 }
+
