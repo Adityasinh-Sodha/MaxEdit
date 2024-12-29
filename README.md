@@ -1,5 +1,6 @@
-![themes](https://github.com/user-attachments/assets/c392d1ce-45d8-4eaa-8be6-551cbef1b96d)
 # MaxEdit
+![fff](https://github.com/user-attachments/assets/57515eef-c1ef-484f-b202-b7f002754726)
+
 The MaxEdit is a modern, web-based editor designed for effortless Markdown editing and live previewing. It's perfect for developers, writers, and anyone who frequently works with Markdown.
 
 ## Features
@@ -19,7 +20,8 @@ The MaxEdit is a modern, web-based editor designed for effortless Markdown editi
 - **[DOMPurify](https://github.com/cure53/DOMPurify)** For sanitizing HTML output.
 - **[Highlight.js](https://github.com/highlightjs/highlight.js)** For syntax highlighting in code blocks.
 - **[Prism.js](https://github.com/PrismJS/prism)** For lightweight, customizable code syntax highlighting.
-- **[Prism Markdown Component](https://github.com/PrismJS/prism)** Adds Markdown language support to Prism.js.
+- **[Prism Markdown Component![fff](https://github.com/user-attachments/assets/22f28c1b-2869-4154-b100-1d98d407f8fa)
+](https://github.com/PrismJS/prism)** Adds Markdown language support to Prism.js.
 - **[GitHub Dark Theme](https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css)** Highlight.js GitHub Dark theme for code styling.
 - **[Prism.css Theme](https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css)** Prism.js default theme for code block styling.
 
