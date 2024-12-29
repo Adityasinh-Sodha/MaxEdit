@@ -39,9 +39,29 @@ changes:
     - Fix Transparency Issue in the White Theme.
     - Fix Cursor Jumping Issue.
     - Fix almost all syntax problems.
-    - Fix delay in keyboard input by removing blur effect
+    - Fix delay in keyboard input by removing blur effect.
   
   known_issues:
     - Enter key did not insert a proper new line and disrupted the layout.
     - In Dark Blue theme table heading and code blocks appear white causing visibility Issue.
     - All items are not together.
+
+title: MaxEdit v2.0
+author: [Adityasinh Sodha]
+date: 29-Dec 2024
+
+changes:
+  added:
+    - Added a feature to resize the Editor and Previewer by dragging the divider.
+    - Added local storage persistence. 
+    - Added an example code that loads the first time the page is opened.
+    - Added a button to reset the editor and local storage persistence.
+    - Set both panels to be maximized by default.
+
+  fixed:
+    - Fixed all previous issues.
+    - Fixed Enter key behaviour.
+    - Fixed 'Table' and 'Block of code' Issue in the all themes.
+  
+  known_issues:
+    - The syntax highlighting is not working when the code load contant from local storage.
