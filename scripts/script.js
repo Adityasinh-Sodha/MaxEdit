@@ -6,6 +6,7 @@ const wordCountDiv = document.getElementById('word-count');
 const gearBtn = document.getElementById('gear-btn');
 const settingsMenu = document.getElementById('settings-menu');
 const editorContainer = document.querySelector('.editor-container');
+const divider = document.querySelector(".divider");
 let isResizing = false;
 
 editorContainer.addEventListener('mousedown', (e) => {
@@ -42,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
         settingsMenu.classList.toggle("active");
     });
 
-    // Close settings menu when clicking outside
     document.addEventListener("click", (e) => {
         if (!gearBtn.contains(e.target) && !settingsMenu.contains(e.target)) {
             settingsMenu.classList.remove("active");
@@ -152,7 +152,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const markdownInput = document.getElementById("markdown-input");
     const preview = document.getElementById("preview");
 
-    // Sample Markdown code
     const sampleMarkdown = `
 # MaxEdit
 
@@ -312,7 +311,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const isMaximized = toggleBtn.textContent === "Minimize";
 
         if (isMaximized) {
-            // Minimize logic
             editorContainer.style.position = "relative";
             editorContainer.style.width = "60%"; 
             editorContainer.style.height = "70%";
@@ -330,6 +328,70 @@ document.addEventListener("DOMContentLoaded", () => {
             toggleBtn.textContent = "Maximize";
         } else {
             maximizeEditor(); 
+        }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const editorContainer = document.querySelector(".editor-container");
+    const markdownInput = document.getElementById("markdown-input");
+    const preview = document.getElementById("preview");
+    const divider = document.querySelector(".divider");
+
+    let isDragging = false;
+
+    divider.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        document.body.style.cursor = "ew-resize"; 
+    });
+
+    document.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+
+        const containerRect = editorContainer.getBoundingClientRect();
+        const newEditorWidth = ((e.clientX - containerRect.left) / containerRect.width) * 100;
+        const newPreviewWidth = 100 - newEditorWidth;
+
+        if (newEditorWidth > 10 && newEditorWidth < 90) {
+            markdownInput.style.width = `${newEditorWidth}%`;
+            preview.style.width = `${newPreviewWidth}%`;
+        }
+    });
+
+    
+    document.addEventListener("mouseup", () => {
+        if (isDragging) {
+            isDragging = false;
+            document.body.style.cursor = ""; 
+        }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const markdownInput = document.getElementById("markdown-input");
+    const preview = document.getElementById("preview");
+
+    function handleInput(event) {
+      
+        const selection = window.getSelection();
+        const range = selection.getRangeAt(0);
+
+        const rawContent = markdownInput.innerText; 
+
+        
+        const sanitizedContent = DOMPurify.sanitize(rawContent); 
+        preview.innerHTML = marked.parse(sanitizedContent); 
+
+        selection.removeAllRanges();
+        selection.addRange(range);
+    }
+
+    markdownInput.addEventListener("input", handleInput);
+
+    markdownInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            document.execCommand('insertHTML', false, '\n');
+            event.preventDefault();
         }
     });
 });
