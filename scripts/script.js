@@ -395,3 +395,42 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const markdownInput = document.getElementById("markdown-input");
+    const preview = document.getElementById("preview");
+
+    const LOCAL_STORAGE_KEY = "editorContent";
+
+    const savedContent = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (savedContent) {
+        markdownInput.innerText = savedContent; 
+        preview.innerHTML = marked.parse(DOMPurify.sanitize(savedContent)); 
+    }
+
+    function saveContent() {
+        const content = markdownInput.innerText;
+        localStorage.setItem(LOCAL_STORAGE_KEY, content);
+    }
+
+    function handleInput(event) {
+        const content = markdownInput.innerText;
+        const sanitizedContent = DOMPurify.sanitize(content); 
+        preview.innerHTML = marked.parse(sanitizedContent); 
+        saveContent(); 
+    }
+
+    markdownInput.addEventListener("input", handleInput);
+
+    const clearButton = document.createElement("button");
+    clearButton.textContent = "Reset";
+    clearButton.classList.add("btn", "btn-reset");
+    clearButton.style.marginLeft = "10px";
+    clearButton.addEventListener("click", () => {
+        localStorage.removeItem(LOCAL_STORAGE_KEY); 
+        markdownInput.innerText = ""; 
+        preview.innerHTML = ""; 
+        
+    });
+    document.querySelector(".toolbar-right").appendChild(clearButton);
+});
