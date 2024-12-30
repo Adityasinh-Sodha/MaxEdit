@@ -332,40 +332,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-    const editorContainer = document.querySelector(".editor-container");
-    const markdownInput = document.getElementById("markdown-input");
-    const preview = document.getElementById("preview");
-    const divider = document.querySelector(".divider");
-
-    let isDragging = false;
-
-    divider.addEventListener("mousedown", (e) => {
-        isDragging = true;
-        document.body.style.cursor = "ew-resize"; 
-    });
-
-    document.addEventListener("mousemove", (e) => {
-        if (!isDragging) return;
-
-        const containerRect = editorContainer.getBoundingClientRect();
-        const newEditorWidth = ((e.clientX - containerRect.left) / containerRect.width) * 100;
-        const newPreviewWidth = 100 - newEditorWidth;
-
-        if (newEditorWidth > 10 && newEditorWidth < 90) {
-            markdownInput.style.width = `${newEditorWidth}%`;
-            preview.style.width = `${newPreviewWidth}%`;
-        }
-    });
-
-    
-    document.addEventListener("mouseup", () => {
-        if (isDragging) {
-            isDragging = false;
-            document.body.style.cursor = ""; 
-        }
-    });
-});
 
 document.addEventListener("DOMContentLoaded", () => {
     const markdownInput = document.getElementById("markdown-input");
@@ -402,10 +368,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const LOCAL_STORAGE_KEY = "editorContent";
 
+    function applySyntaxHighlighting() {
+        const codeBlocks = preview.querySelectorAll("pre code");
+        codeBlocks.forEach(block => {
+            Prism.highlightElement(block);
+        });
+    }
+
     const savedContent = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (savedContent) {
         markdownInput.innerText = savedContent; 
-        preview.innerHTML = marked.parse(DOMPurify.sanitize(savedContent)); 
+        const sanitizedContent = DOMPurify.sanitize(savedContent); 
+        preview.innerHTML = marked.parse(sanitizedContent); 
+        setTimeout(applySyntaxHighlighting, 0); 
     }
 
     function saveContent() {
@@ -413,24 +388,125 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem(LOCAL_STORAGE_KEY, content);
     }
 
-    function handleInput(event) {
+    function handleInput() {
         const content = markdownInput.innerText;
         const sanitizedContent = DOMPurify.sanitize(content); 
         preview.innerHTML = marked.parse(sanitizedContent); 
+        applySyntaxHighlighting(); 
         saveContent(); 
     }
 
     markdownInput.addEventListener("input", handleInput);
 
     const clearButton = document.createElement("button");
-    clearButton.textContent = "Reset";
+    clearButton.textContent = "reset";
     clearButton.classList.add("btn", "btn-reset");
     clearButton.style.marginLeft = "10px";
     clearButton.addEventListener("click", () => {
         localStorage.removeItem(LOCAL_STORAGE_KEY); 
         markdownInput.innerText = ""; 
-        preview.innerHTML = ""; 
-        
+        preview.innerHTML = "";
     });
     document.querySelector(".toolbar-right").appendChild(clearButton);
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const editorContainer = document.querySelector(".editor-container");
+    const markdownInput = document.getElementById("markdown-input");
+    const preview = document.getElementById("preview");
+    const divider = document.querySelector(".divider");
+
+    let isResizing = false; 
+    let isDragging = false; 
+    let offsetX = 0; 
+    let offsetY = 0; 
+
+  
+    divider.addEventListener("mousedown", (e) => {
+        if (!isDragging) { 
+            isResizing = true;
+            document.body.style.cursor = "ew-resize"; 
+        }
+    });
+
+    document.addEventListener("mousemove", (e) => {
+        if (isResizing && !isDragging) {
+            const containerRect = editorContainer.getBoundingClientRect();
+            const newEditorWidth = ((e.clientX - containerRect.left) / containerRect.width) * 100;
+            const newPreviewWidth = 100 - newEditorWidth;
+
+            if (newEditorWidth > 10 && newEditorWidth < 90) {
+                markdownInput.style.width = `${newEditorWidth}%`;
+                preview.style.width = `${newPreviewWidth}%`;
+            }
+        }
+    });
+
+    document.addEventListener("mouseup", () => {
+        if (isResizing) {
+            isResizing = false;
+            document.body.style.cursor = ""; 
+        }
+    });
+
+    divider.addEventListener("mousedown", (e) => {
+        const dividerRect = divider.getBoundingClientRect();
+        const middleY = dividerRect.top + dividerRect.height / 2;
+        const pointerY = e.clientY;
+
+        if (Math.abs(pointerY - middleY) < 10) { 
+            isDragging = true;
+
+            const rect = editorContainer.getBoundingClientRect();
+            offsetX = e.clientX - rect.left;
+            offsetY = e.clientY - rect.top;
+
+            document.body.style.cursor = "move";
+        }
+    });
+
+    document.addEventListener("mousemove", (e) => {
+        if (isDragging) {
+            const newLeft = e.clientX - offsetX;
+            const newTop = e.clientY - offsetY;
+
+            editorContainer.style.position = "absolute";
+            editorContainer.style.left = `${newLeft}px`;
+            editorContainer.style.top = `${newTop}px`;
+        }
+    });
+
+    document.addEventListener("mouseup", () => {
+        if (isDragging) {
+            isDragging = false;
+            document.body.style.cursor = ""; 
+        }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const editorContainer = document.querySelector(".editor-container");
+    const toolbar = document.querySelector(".top-toolbar");
+    let closeBtn = document.createElement("button");
+
+    closeBtn.id = "close-btn";
+    closeBtn.textContent = "×"; 
+    closeBtn.style.position = "absolute";
+    closeBtn.style.top = "10px";
+    closeBtn.style.right = "10px";
+    closeBtn.style.backgroundColor = "#f44336"; 
+    closeBtn.style.color = "#fff";
+    closeBtn.style.border = "none";
+    closeBtn.style.padding = "5px 10px";
+    closeBtn.style.borderRadius = "50%";
+    closeBtn.style.cursor = "pointer";
+    closeBtn.style.fontSize = "16px";
+
+    toolbar.appendChild(closeBtn);
+
+    closeBtn.addEventListener("click", () => {
+        editorContainer.style.display = "none";
+        closeBtn.style.display = "none";
+    });
+});
+
