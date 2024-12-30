@@ -123,7 +123,8 @@ body {
 }
 
 .editor-container {
-    position: relative;
+    position: absolute;
+    user-select: none;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -498,6 +499,18 @@ body.dark-blue-theme #preview {
      background-color: #ccc; 
 }
 
+.divider::before {
+    content: "";
+    position: absolute;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px; 
+    height: 10px; 
+    background-color: #aaa; 
+    cursor: move; 
+    border-radius: 5px; 
+}
 
 body:not(.dark-theme) .divider {
     background-color: #ddd; 
@@ -525,4 +538,5 @@ body.dark-blue-theme #preview pre {
     border-radius: 5px; 
     padding: 10px; 
 }
+
 
