@@ -24,6 +24,7 @@ The MaxEdit is a modern, web-based editor designed for effortless Markdown editi
 - **[GitHub Dark Theme](https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css)** Highlight.js GitHub Dark theme for code styling.
 - **[Prism.css Theme](https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css)** Prism.js default theme for code block styling.
 
+<!-- This is the testing message to insure that the github is sync properly with gitlab -->
 
 ## License
 
