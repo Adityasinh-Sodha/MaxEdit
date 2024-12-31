@@ -3,7 +3,7 @@ name: Sync Repos
 on:
   push:
     branches:
-      - main  # or the branch you want to sync
+      - main
 
 jobs:
   sync:
@@ -12,17 +12,23 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Unshallow Clone
+        run: |
+          git fetch --unshallow
 
       - name: Push to GitLab
         env:
           GITLAB_TOKEN: ${{ secrets.GITLAB }}
         run: |
           git remote add gitlab https://Adityasinh-Sodha:$GITLAB_TOKEN@gitlab.com/Adityasinh-Sodha/MaxEdit.git
-          git push --mirror gitlab
+          git push gitlab main
 
       - name: Push to Bitbucket
         env:
           BITBUCKET_TOKEN: ${{ secrets.BITBUCKET }}
         run: |
           git remote add bitbucket https://adityasinh-sodha:$BITBUCKET_TOKEN@bitbucket.org/Adityasinh-Sodha/MaxEdit.git
-          git push --mirror bitbucket
+          git push bitbucket main
