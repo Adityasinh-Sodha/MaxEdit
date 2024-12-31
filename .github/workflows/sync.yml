@@ -44,9 +44,11 @@ jobs:
         run: |
           git remote add bitbucket https://adityasinh-sodha:$BITBUCKET_TOKEN@bitbucket.org/adityasinh-sodha/MaxEdit.git
           git pull bitbucket main --rebase
-
+          
       - name: Push to Bitbucket
         env:
           BITBUCKET_TOKEN: ${{ secrets.BITBUCKET }}
         run: |
-          git push bitbucket main
+         git remote add bitbucket https://adityasinh-sodha:$BITBUCKET_TOKEN@bitbucket.org/adityasinh-sodha/MaxEdit.git
+         git push bitbucket main --force
+
