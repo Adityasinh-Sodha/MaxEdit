@@ -15,9 +15,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Unshallow Clone
+      - name: Unshallow Clone (if needed)
         run: |
-          git fetch --unshallow
+          if [ -f .git/shallow ]; then
+            git fetch --unshallow
+          else
+            echo "Repository is already complete. No need to unshallow."
+          fi
 
       - name: Push to GitLab
         env:
@@ -30,5 +34,5 @@ jobs:
         env:
           BITBUCKET_TOKEN: ${{ secrets.BITBUCKET }}
         run: |
-          git remote add bitbucket https://adityasinh-sodha:$BITBUCKET_TOKEN@bitbucket.org/Adityasinh-Sodha/MaxEdit.git
+          git remote add bitbucket https://adityasinh-sodha:$BITBUCKET_TOKEN@bitbucket.org/adityasinh-sodha/MaxEdit.git
           git push bitbucket main
