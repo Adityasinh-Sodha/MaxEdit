@@ -15,6 +15,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Set Git User Info
+        run: |
+          git config --global user.email "work.adityasodha@gmail.com"
+          git config --global user.name "Adityasinh-Sodha"
+
       - name: Unshallow Clone (if needed)
         run: |
           if [ -f .git/shallow ]; then
@@ -36,4 +41,3 @@ jobs:
           GITLAB_TOKEN: ${{ secrets.GITLAB }}
         run: |
           git push gitlab main
-          git push gitlab --tags
