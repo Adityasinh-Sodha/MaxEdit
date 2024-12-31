@@ -23,16 +23,28 @@ jobs:
             echo "Repository is already complete. No need to unshallow."
           fi
 
-      - name: Push to GitLab
+      - name: Pull from GitLab
         env:
           GITLAB_TOKEN: ${{ secrets.GITLAB }}
         run: |
           git remote add gitlab https://Adityasinh-Sodha:$GITLAB_TOKEN@gitlab.com/Adityasinh-Sodha/MaxEdit.git
+          git pull gitlab main --rebase
+
+      - name: Push to GitLab
+        env:
+          GITLAB_TOKEN: ${{ secrets.GITLAB }}
+        run: |
           git push gitlab main
+
+      - name: Pull from Bitbucket
+        env:
+          BITBUCKET_TOKEN: ${{ secrets.BITBUCKET }}
+        run: |
+          git remote add bitbucket https://adityasinh-sodha:$BITBUCKET_TOKEN@bitbucket.org/adityasinh-sodha/MaxEdit.git
+          git pull bitbucket main --rebase
 
       - name: Push to Bitbucket
         env:
           BITBUCKET_TOKEN: ${{ secrets.BITBUCKET }}
         run: |
-          git remote add bitbucket https://adityasinh-sodha:$BITBUCKET_TOKEN@bitbucket.org/adityasinh-sodha/MaxEdit.git
           git push bitbucket main
