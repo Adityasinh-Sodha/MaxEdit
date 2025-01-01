@@ -276,14 +276,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const divider = document.querySelector(".divider");
     let toggleBtn = document.getElementById("toggle-btn");
 
+    // Function to ensure buttons exist
     function ensureButtons() {
+        // Ensure the toggle button exists
         if (!toggleBtn) {
             toggleBtn = document.createElement("button");
             toggleBtn.id = "toggle-btn";
-            toggleBtn.textContent = "-";
+            toggleBtn.textContent = "-"; // Default state for minimize
             toggleBtn.style.marginLeft = "10px";
         }
 
+        // Ensure buttons container exists
         let buttonsContainer = document.querySelector(".preview-buttons");
         if (!buttonsContainer) {
             buttonsContainer = document.createElement("div");
@@ -296,10 +299,11 @@ document.addEventListener("DOMContentLoaded", () => {
             preview.appendChild(buttonsContainer);
         }
 
+        // Ensure the close button exists
         if (!buttonsContainer.querySelector(".close-btn")) {
             const closeButton = document.createElement("button");
             closeButton.className = "close-btn";
-            closeButton.textContent = "×"; 
+            closeButton.textContent = "×"; // Close button
             closeButton.style.backgroundColor = "red";
             closeButton.style.color = "white";
             closeButton.style.border = "none";
@@ -309,20 +313,24 @@ document.addEventListener("DOMContentLoaded", () => {
             closeButton.style.cursor = "pointer";
             closeButton.style.fontSize = "18px";
             closeButton.addEventListener("click", () => {
-                editorContainer.style.display = "none"; 
+                editorContainer.style.display = "none"; // Hide the editor-container
             });
             buttonsContainer.appendChild(closeButton);
         }
 
+        // Ensure the toggle button is in the buttons container
         if (!buttonsContainer.contains(toggleBtn)) {
             buttonsContainer.appendChild(toggleBtn);
         }
     }
 
+    // Call ensureButtons once on load
     ensureButtons();
 
+    // Toolbar height
     const toolbarHeight = toolbar.offsetHeight;
 
+    // Function to maximize editor
     function maximizeEditor() {
         editorContainer.style.position = "fixed";
         editorContainer.style.top = `${toolbarHeight}px`;
@@ -339,16 +347,19 @@ document.addEventListener("DOMContentLoaded", () => {
         markdownInput.style.height = "100%";
         preview.style.height = "100%";
 
-        document.body.style.overflow = "hidden"; 
-        toggleBtn.textContent = "-"; 
+        document.body.style.overflow = "hidden"; // Prevent background scrolling
+        toggleBtn.textContent = "-"; // Set to minimize
     }
 
+    // Initially maximize editor
     maximizeEditor();
 
+    // Toggle button functionality
     toggleBtn.addEventListener("click", () => {
         const isMaximized = toggleBtn.textContent === "-";
 
         if (isMaximized) {
+            // Minimize editor
             editorContainer.style.position = "relative";    
             editorContainer.style.width = "60%";
             editorContainer.style.height = "70%";
@@ -369,6 +380,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // Divider resizing functionality
     let isResizing = false;
     divider.addEventListener("mousedown", () => {
         isResizing = true;
@@ -551,6 +563,22 @@ document.addEventListener("DOMContentLoaded", () => {
         if (isDragging) {
             isDragging = false;
             document.body.style.cursor = ""; 
+        }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const editorContainer = document.querySelector(".editor-container");
+    const maxEditLogo = document.getElementById("maxedit-logo");
+
+    maxEditLogo.addEventListener("click", () => {
+        if (editorContainer.style.display === "none") {
+            editorContainer.style.display = "flex"; 
+            editorContainer.style.visibility = "visible"; 
+            const preview = document.getElementById("preview");
+            if (preview) {
+                preview.style.display = "block"; 
+            }
         }
     });
 });
