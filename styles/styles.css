@@ -71,22 +71,6 @@ body {
     justify-content: flex-end;
 }
 
-#toggle-btn {
-    padding: 5px 15px;
-    font-size: 14px;
-    border: 1px solid #333;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
-    order: 1; 
-}
-
-#toggle-btn:hover {
-    background-color: #0056b3;
-}
 
 .btn-reset {
     background-color: #007bff !important; 
@@ -530,7 +514,6 @@ body.dark-blue-theme #preview td {
     color: #cfd8e3; 
 }
 
-/* Code Blocks */
 body.dark-blue-theme #preview pre {
     background-color: #2e2e3e;
     color: #cfd8e3; 
@@ -538,4 +521,53 @@ body.dark-blue-theme #preview pre {
     padding: 10px; 
 }
 
+.preview-buttons {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 10px; 
+    z-index: 1000;
+}
 
+.close-btn {
+    background-color: red !important;
+    color: white !important;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: bold;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    order: 2;
+}
+
+.close-btn:hover {
+    background-color: darkred !important;
+}
+
+#toggle-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%; 
+    font-size: 18px;
+    font-weight: bold;
+    width: 32px;
+    height: 32px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    order: 1;
+}
+
+#toggle-btn:hover {
+    background-color: #0056b3;
+}
