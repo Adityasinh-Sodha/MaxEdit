@@ -273,15 +273,53 @@ document.addEventListener("DOMContentLoaded", () => {
     const markdownInput = document.getElementById("markdown-input");
     const preview = document.getElementById("preview");
     const toolbar = document.querySelector(".top-toolbar");
+    const divider = document.querySelector(".divider");
     let toggleBtn = document.getElementById("toggle-btn");
 
-    if (!toggleBtn) {
-        toggleBtn = document.createElement("button");
-        toggleBtn.id = "toggle-btn";
-        toggleBtn.textContent = "Minimize"; 
-        toggleBtn.style.marginLeft = "10px"; 
-        toolbar.querySelector(".toolbar-right").appendChild(toggleBtn);
+    function ensureButtons() {
+        if (!toggleBtn) {
+            toggleBtn = document.createElement("button");
+            toggleBtn.id = "toggle-btn";
+            toggleBtn.textContent = "-";
+            toggleBtn.style.marginLeft = "10px";
+        }
+
+        let buttonsContainer = document.querySelector(".preview-buttons");
+        if (!buttonsContainer) {
+            buttonsContainer = document.createElement("div");
+            buttonsContainer.className = "preview-buttons";
+            buttonsContainer.style.position = "absolute";
+            buttonsContainer.style.top = "10px";
+            buttonsContainer.style.right = "10px";
+            buttonsContainer.style.display = "flex";
+            buttonsContainer.style.gap = "10px";
+            preview.appendChild(buttonsContainer);
+        }
+
+        if (!buttonsContainer.querySelector(".close-btn")) {
+            const closeButton = document.createElement("button");
+            closeButton.className = "close-btn";
+            closeButton.textContent = "×"; 
+            closeButton.style.backgroundColor = "red";
+            closeButton.style.color = "white";
+            closeButton.style.border = "none";
+            closeButton.style.borderRadius = "50%";
+            closeButton.style.width = "32px";
+            closeButton.style.height = "32px";
+            closeButton.style.cursor = "pointer";
+            closeButton.style.fontSize = "18px";
+            closeButton.addEventListener("click", () => {
+                editorContainer.style.display = "none"; 
+            });
+            buttonsContainer.appendChild(closeButton);
+        }
+
+        if (!buttonsContainer.contains(toggleBtn)) {
+            buttonsContainer.appendChild(toggleBtn);
+        }
     }
+
+    ensureButtons();
 
     const toolbarHeight = toolbar.offsetHeight;
 
@@ -302,17 +340,17 @@ document.addEventListener("DOMContentLoaded", () => {
         preview.style.height = "100%";
 
         document.body.style.overflow = "hidden"; 
-        toggleBtn.textContent = "Minimize"; 
+        toggleBtn.textContent = "-"; 
     }
 
     maximizeEditor();
 
     toggleBtn.addEventListener("click", () => {
-        const isMaximized = toggleBtn.textContent === "Minimize";
+        const isMaximized = toggleBtn.textContent === "-";
 
         if (isMaximized) {
-            editorContainer.style.position = "relative";
-            editorContainer.style.width = "60%"; 
+            editorContainer.style.position = "relative";    
+            editorContainer.style.width = "60%";
             editorContainer.style.height = "70%";
             editorContainer.style.margin = "auto";
             editorContainer.style.padding = "20px";
@@ -325,12 +363,45 @@ document.addEventListener("DOMContentLoaded", () => {
             preview.style.height = "100%";
 
             document.body.style.overflow = ""; 
-            toggleBtn.textContent = "Maximize";
+            toggleBtn.textContent = "☐"; 
         } else {
             maximizeEditor(); 
         }
     });
+
+    let isResizing = false;
+    divider.addEventListener("mousedown", () => {
+        isResizing = true;
+        document.body.style.cursor = "ew-resize"; 
+    });
+
+    document.addEventListener("mousemove", (e) => {
+        if (!isResizing) return;
+
+        const containerRect = editorContainer.getBoundingClientRect();
+        const newEditorWidth = ((e.clientX - containerRect.left) / containerRect.width) * 100;
+        const newPreviewWidth = 100 - newEditorWidth;
+
+        if (newEditorWidth > 10 && newEditorWidth < 90) {
+            markdownInput.style.width = `${newEditorWidth}%`;
+            preview.style.width = `${newPreviewWidth}%`;
+        }
+    });
+
+    document.addEventListener("mouseup", () => {
+        if (isResizing) {
+            isResizing = false;
+            document.body.style.cursor = ""; 
+        }
+    });
+
+    const observer = new MutationObserver(() => {
+        ensureButtons();
+    });
+
+    observer.observe(editorContainer, { childList: true, subtree: true });
 });
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -483,30 +554,3 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
-
-document.addEventListener("DOMContentLoaded", () => {
-    const editorContainer = document.querySelector(".editor-container");
-    const toolbar = document.querySelector(".top-toolbar");
-    let closeBtn = document.createElement("button");
-
-    closeBtn.id = "close-btn";
-    closeBtn.textContent = "×"; 
-    closeBtn.style.position = "absolute";
-    closeBtn.style.top = "10px";
-    closeBtn.style.right = "10px";
-    closeBtn.style.backgroundColor = "#f44336"; 
-    closeBtn.style.color = "#fff";
-    closeBtn.style.border = "none";
-    closeBtn.style.padding = "5px 10px";
-    closeBtn.style.borderRadius = "50%";
-    closeBtn.style.cursor = "pointer";
-    closeBtn.style.fontSize = "16px";
-
-    toolbar.appendChild(closeBtn);
-
-    closeBtn.addEventListener("click", () => {
-        editorContainer.style.display = "none";
-        closeBtn.style.display = "none";
-    });
-});
-
