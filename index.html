@@ -13,7 +13,6 @@
     <script src="scripts/prism-markdown.min.js"></script>
     <script src="scripts/marked.min.js"></script>
     <script src="scripts/purify.min.js"></script>
-    <script src="scripts/storehouse.js"></script>
 
 </head>
 <body class="dark-theme">
@@ -40,11 +39,11 @@
         <div id="settings-menu" class="hidden">
             <button id="copy-btn">HTML</button>
              <select id="theme-selector">
-                <option value="dark-blue-theme">Dark Blue Theme</option>
+                <option value="dark-blue-theme">DarkBlue Theme</option>
         <option value="default">White Theme</option>
         <option value="dark-theme">Dark Theme</option>
         
-    </select>
+    </select>   
             <div id="word-count">Word Count: 0</div>
         </div>
     </div>
@@ -55,9 +54,16 @@
     <div class="drag-handle"></div>
     <div id="markdown-input" contenteditable="true" placeholder="Write your Markdown here..."></div>
     <div class="divider"></div>
-    <div id="preview"></div>
+    <div id="preview">
+            <button class="close-btn">&times;</button>
 </div>
 
+</div>
+
+<div id="maxedit-logo">
+    <img src="assets/maxedit.ico" alt="Project Logo">
+    <div class="logo-name">MaxEdit</div>
+</div>
 
 
     <script src="scripts/script.js"></script>
