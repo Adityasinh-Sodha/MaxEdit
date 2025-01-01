@@ -26,6 +26,7 @@ body {
 }
 
 #maxedit-logo img {
+    width: 50px;
     cursor: pointer;
     height: auto;
     border-radius: 50%; 
@@ -34,7 +35,7 @@ body {
 }
 
 #maxedit-logo img:hover {
-    transform: scale(1.1); 
+    transform: scale(1.1); /
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
 }
 
@@ -42,9 +43,52 @@ body {
     margin-top: 5px;
     font-size: 16px;
     font-weight: bold;
-    color: #444;
+    color: #fff;
     text-align: center;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    text-shadow: 
+        1px 1px 2px black,  
+        -1px 1px 2px black, 
+        1px -1px 2px black, 
+        -1px -1px 2px black; 
+}
+
+
+#setting-logo {
+    position: absolute; 
+    top: 180px; 
+    left: 40px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 300; 
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#setting-logo img {
+    cursor: pointer;
+    height: auto;
+    border-radius: 50%; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+#setting-logo img:hover {
+    transform: scale(1.1); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+#setting-logo .logo-name {
+    margin-top: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+     text-shadow: 
+        1px 1px 2px black,  
+        -1px 1px 2px black, 
+        1px -1px 2px black, 
+        -1px -1px 2px black; 
 }
 
 
