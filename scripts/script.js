@@ -331,7 +331,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!buttonsContainer.querySelector(".close-btn")) {
             const closeButton = document.createElement("button");
             closeButton.className = "close-btn";
-            closeButton.textContent = "×"; 
+            closeButton.textContent = "×"; // Close button
             closeButton.style.backgroundColor = "red";
             closeButton.style.color = "white";
             closeButton.style.border = "none";
@@ -341,20 +341,24 @@ document.addEventListener("DOMContentLoaded", () => {
             closeButton.style.cursor = "pointer";
             closeButton.style.fontSize = "18px";
             closeButton.addEventListener("click", () => {
-                editorContainer.style.display = "none"; 
+                editorContainer.style.display = "none"; // Hide the editor-container
             });
             buttonsContainer.appendChild(closeButton);
         }
 
+        // Ensure the toggle button is in the buttons container
         if (!buttonsContainer.contains(toggleBtn)) {
             buttonsContainer.appendChild(toggleBtn);
         }
     }
 
+    // Call ensureButtons once on load
     ensureButtons();
 
+    // Toolbar height
     const toolbarHeight = toolbar.offsetHeight;
 
+    // Function to maximize editor
     function maximizeEditor() {
         editorContainer.style.position = "fixed";
         editorContainer.style.top = `${toolbarHeight}px`;
@@ -371,16 +375,19 @@ document.addEventListener("DOMContentLoaded", () => {
         markdownInput.style.height = "100%";
         preview.style.height = "100%";
 
-        document.body.style.overflow = "hidden"; 
-        toggleBtn.textContent = "-"; 
+        document.body.style.overflow = "hidden"; // Prevent background scrolling
+        toggleBtn.textContent = "-"; // Set to minimize
     }
 
+    // Initially maximize editor
     maximizeEditor();
 
+    // Toggle button functionality
     toggleBtn.addEventListener("click", () => {
         const isMaximized = toggleBtn.textContent === "-";
 
         if (isMaximized) {
+            // Minimize editor
             editorContainer.style.position = "relative";    
             editorContainer.style.width = "60%";
             editorContainer.style.height = "70%";
@@ -401,6 +408,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // Divider resizing functionality
     let isResizing = false;
     divider.addEventListener("mousedown", () => {
         isResizing = true;
@@ -468,11 +476,12 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
     const markdownInput = document.getElementById("markdown-input");
     const preview = document.getElementById("preview");
-    const settingsMenu = document.getElementById("settings-menu"); 
-    const copyButton = document.getElementById("copy-btn");
+    const settingsMenu = document.getElementById("settings-menu"); // Access the settings menu
+    const copyButton = document.getElementById("copy-btn"); // Access the Copy HTML button
 
     const LOCAL_STORAGE_KEY = "editorContent";
 
+    // Load saved content from localStorage
     const savedContent = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (savedContent) {
         markdownInput.innerText = savedContent; 
@@ -480,6 +489,7 @@ document.addEventListener("DOMContentLoaded", () => {
         preview.innerHTML = marked.parse(sanitizedContent); 
     }
 
+    // Handle input event for live preview and save
     markdownInput.addEventListener("input", () => {
         const content = markdownInput.innerText;
         const sanitizedContent = DOMPurify.sanitize(content); 
@@ -487,16 +497,19 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem(LOCAL_STORAGE_KEY, content); 
     });
 
+    // Create the reset button
     const resetButton = document.createElement("button");
     resetButton.textContent = "Reset MaxEdit";
-    resetButton.classList.add("btn-reset"); 
+    resetButton.classList.add("btn-reset"); // Add the reset-specific CSS class
 
+    // Reset button functionality
     resetButton.addEventListener("click", () => {
-        localStorage.removeItem(LOCAL_STORAGE_KEY); 
-        markdownInput.innerText = ""; 
-        preview.innerHTML = ""; 
+        localStorage.removeItem(LOCAL_STORAGE_KEY); // Clear local storage
+        markdownInput.innerText = ""; // Clear the editor
+        preview.innerHTML = ""; // Clear the preview
     });
 
+    // Insert the reset button after the Copy HTML button
     if (copyButton) {
         copyButton.insertAdjacentElement("afterend", resetButton);
     }
