@@ -36,19 +36,29 @@ window.addEventListener('mouseup', () => {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    const gearBtn = document.getElementById("gear-btn");
-    const settingsMenu = document.getElementById("settings-menu");
+    const settingLogo = document.getElementById("setting-logo"); // Settings Logo
+    const settingsMenu = document.getElementById("settings-menu"); // Settings Menu
 
-    gearBtn.addEventListener("click", () => {
-        settingsMenu.classList.toggle("active");
+    // Toggle visibility of settings menu when clicking the settings logo
+    settingLogo.addEventListener("click", () => {
+        if (settingsMenu.classList.contains("hidden")) {
+            settingsMenu.classList.remove("hidden"); // Show settings menu
+            settingsMenu.classList.add("active"); // Activate menu
+        } else {
+            settingsMenu.classList.add("hidden"); // Hide settings menu
+            settingsMenu.classList.remove("active"); // Deactivate menu
+        }
     });
 
-    document.addEventListener("click", (e) => {
-        if (!gearBtn.contains(e.target) && !settingsMenu.contains(e.target)) {
-            settingsMenu.classList.remove("active");
+    // Close the settings menu when clicking outside of it
+    document.addEventListener("click", (event) => {
+        if (!settingLogo.contains(event.target) && !settingsMenu.contains(event.target)) {
+            settingsMenu.classList.add("hidden"); // Hide settings menu
+            settingsMenu.classList.remove("active"); // Deactivate menu
         }
     });
 });
+
 
 function saveCaretPosition(el) {
     const selection = window.getSelection();
@@ -135,16 +145,34 @@ copyBtn.addEventListener('click', () => {
         alert('HTML copied to clipboard!');
     });
 });
-const themeSelector = document.getElementById('theme-selector');
-document.body.classList.add('dark-blue-theme');
-themeSelector.value = 'dark-blue-theme';
-themeSelector.addEventListener('change', (e) => {
-    const selectedTheme = e.target.value;
-    document.body.className = '';
-    
-    if (selectedTheme !== 'default') {
-        document.body.classList.add(selectedTheme);
-    }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const themeRadios = document.querySelectorAll('input[name="theme"]');
+    const themePreviews = document.querySelectorAll('.theme-preview');
+
+    // Add event listener to each radio button
+    themeRadios.forEach((radio) => {
+        radio.addEventListener("change", () => {
+            const selectedTheme = radio.value;
+
+            // Apply the selected theme
+            document.body.className = ""; // Remove existing theme classes
+            document.body.classList.add(selectedTheme);
+        });
+    });
+
+    // Add click event to each theme preview image
+    themePreviews.forEach((preview) => {
+        preview.addEventListener("click", () => {
+            const parent = preview.parentElement; // Get the parent .theme-option
+            const radio = parent.querySelector('input[name="theme"]'); // Get associated radio button
+
+            if (radio) {
+                radio.checked = true; // Select the radio button
+                radio.dispatchEvent(new Event("change")); // Trigger the change event
+            }
+        });
+    });
 });
 
 
@@ -303,7 +331,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!buttonsContainer.querySelector(".close-btn")) {
             const closeButton = document.createElement("button");
             closeButton.className = "close-btn";
-            closeButton.textContent = "×"; // Close button
+            closeButton.textContent = "×"; 
             closeButton.style.backgroundColor = "red";
             closeButton.style.color = "white";
             closeButton.style.border = "none";
@@ -313,24 +341,20 @@ document.addEventListener("DOMContentLoaded", () => {
             closeButton.style.cursor = "pointer";
             closeButton.style.fontSize = "18px";
             closeButton.addEventListener("click", () => {
-                editorContainer.style.display = "none"; // Hide the editor-container
+                editorContainer.style.display = "none"; 
             });
             buttonsContainer.appendChild(closeButton);
         }
 
-        // Ensure the toggle button is in the buttons container
         if (!buttonsContainer.contains(toggleBtn)) {
             buttonsContainer.appendChild(toggleBtn);
         }
     }
 
-    // Call ensureButtons once on load
     ensureButtons();
 
-    // Toolbar height
     const toolbarHeight = toolbar.offsetHeight;
 
-    // Function to maximize editor
     function maximizeEditor() {
         editorContainer.style.position = "fixed";
         editorContainer.style.top = `${toolbarHeight}px`;
@@ -347,19 +371,16 @@ document.addEventListener("DOMContentLoaded", () => {
         markdownInput.style.height = "100%";
         preview.style.height = "100%";
 
-        document.body.style.overflow = "hidden"; // Prevent background scrolling
-        toggleBtn.textContent = "-"; // Set to minimize
+        document.body.style.overflow = "hidden"; 
+        toggleBtn.textContent = "-"; 
     }
 
-    // Initially maximize editor
     maximizeEditor();
 
-    // Toggle button functionality
     toggleBtn.addEventListener("click", () => {
         const isMaximized = toggleBtn.textContent === "-";
 
         if (isMaximized) {
-            // Minimize editor
             editorContainer.style.position = "relative";    
             editorContainer.style.width = "60%";
             editorContainer.style.height = "70%";
@@ -380,7 +401,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Divider resizing functionality
     let isResizing = false;
     divider.addEventListener("mousedown", () => {
         isResizing = true;
@@ -448,50 +468,40 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
     const markdownInput = document.getElementById("markdown-input");
     const preview = document.getElementById("preview");
+    const settingsMenu = document.getElementById("settings-menu"); 
+    const copyButton = document.getElementById("copy-btn");
 
     const LOCAL_STORAGE_KEY = "editorContent";
-
-    function applySyntaxHighlighting() {
-        const codeBlocks = preview.querySelectorAll("pre code");
-        codeBlocks.forEach(block => {
-            Prism.highlightElement(block);
-        });
-    }
 
     const savedContent = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (savedContent) {
         markdownInput.innerText = savedContent; 
         const sanitizedContent = DOMPurify.sanitize(savedContent); 
         preview.innerHTML = marked.parse(sanitizedContent); 
-        setTimeout(applySyntaxHighlighting, 0); 
     }
 
-    function saveContent() {
-        const content = markdownInput.innerText;
-        localStorage.setItem(LOCAL_STORAGE_KEY, content);
-    }
-
-    function handleInput() {
+    markdownInput.addEventListener("input", () => {
         const content = markdownInput.innerText;
         const sanitizedContent = DOMPurify.sanitize(content); 
         preview.innerHTML = marked.parse(sanitizedContent); 
-        applySyntaxHighlighting(); 
-        saveContent(); 
-    }
+        localStorage.setItem(LOCAL_STORAGE_KEY, content); 
+    });
 
-    markdownInput.addEventListener("input", handleInput);
+    const resetButton = document.createElement("button");
+    resetButton.textContent = "Reset MaxEdit";
+    resetButton.classList.add("btn-reset"); 
 
-    const clearButton = document.createElement("button");
-    clearButton.textContent = "reset";
-    clearButton.classList.add("btn", "btn-reset");
-    clearButton.style.marginLeft = "10px";
-    clearButton.addEventListener("click", () => {
+    resetButton.addEventListener("click", () => {
         localStorage.removeItem(LOCAL_STORAGE_KEY); 
         markdownInput.innerText = ""; 
-        preview.innerHTML = "";
+        preview.innerHTML = ""; 
     });
-    document.querySelector(".toolbar-right").appendChild(clearButton);
+
+    if (copyButton) {
+        copyButton.insertAdjacentElement("afterend", resetButton);
+    }
 });
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const editorContainer = document.querySelector(".editor-container");
