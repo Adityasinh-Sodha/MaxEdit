@@ -92,6 +92,155 @@ body {
 }
 
 
+#settings-menu {
+    position: absolute;
+    top: 180px; 
+    left: 100px; 
+    width: 400px; 
+    height: auto; 
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+    padding: 15px; 
+    display: none; 
+    align-items: center;
+    flex-direction: column;
+    border-radius: 15px;
+    gap: 15px; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(20px);
+    z-index: 3000;
+}
+
+#settings-menu.active {
+    display: flex; 
+    flex-direction: column; 
+}
+
+
+#settings-menu button {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 10px; 
+    cursor: pointer;
+    font-size: 14px;
+    width: auto;
+}
+
+#settings-menu button:hover {
+    background-color: #0056b3;
+}
+
+#settings-menu select {
+    width: 100%; 
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background-color: #1a1a1a;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+}
+
+#settings-menu select:hover {
+    background-color: #333;
+}
+
+#settings-menu #word-count {
+    font-size: 12px;
+    color: #ccc;
+    text-align: center;
+}
+
+#settings-menu .button-row {
+    display: flex;
+    flex-direction: row; 
+    gap: 10px; 
+    justify-content: center; 
+}
+
+#setting-logo img:hover {
+    transform: scale(1.2);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+.hidden {
+    display: none;
+}
+
+#theme-selector {
+    display: flex;
+    flex-direction: row; 
+    gap: 20px; 
+    justify-content: center; 
+}
+
+.theme-option {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    text-align: center;
+}
+
+.theme-preview {
+    width: 100px; 
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer; 
+    transition: transform 0.2s ease;
+}
+
+.theme-preview:hover {
+    transform: scale(1.1);
+}
+
+input[type="radio"] {
+    margin-top: 5px; 
+    cursor: pointer;
+}
+    
+.html-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 12px; 
+    cursor: pointer;
+    font-size: 12px; 
+    width: auto; 
+    height: auto; 
+    max-width: 100px; 
+    text-align: center; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+}
+
+.html-btn:hover {
+    background-color: #0056b3; 
+}
+
+.btn-reset {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 12px; 
+    cursor: pointer;
+    font-size: 12px; 
+    width: auto; 
+    height: auto; 
+    max-width: 100px; 
+    text-align: center; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+}
+
+.btn-reset:hover {
+    background-color: #0056b3;
+}
+
 .editor-controls {
     display: flex;
     justify-content: center;
@@ -148,23 +297,6 @@ body {
     align-items: center;
     gap: 10px;
     justify-content: flex-end;
-}
-
-
-.btn-reset {
-    background-color: #007bff !important; 
-    color: #fff !important; 
-    border: none !important;
-    border-radius: 4px !important;
-    padding: 5px 10px !important;
-    cursor: pointer !important;
-    font-size: 14px !important;
-    font-weight: bold !important;
-    transition: background-color 0.3s ease !important;
-}
-
-.btn-reset:hover {
-    background-color: #0056b3 !important; 
 }
 
 
@@ -273,56 +405,8 @@ body {
     flex: 1;
 }
 
-#gear-btn {
-    height: 30px;
-    cursor: pointer;
-    order: 2;
-}
-
-#toggle-btn:hover,
-#gear-btn:hover {
-    background-color: #0056b3;
-}
 
 
-#settings-menu {
-    position: absolute;
-    top: 40px; 
-    right: 0; 
-    background-color: #000000;
-    color: #fff;
-    border: 1px solid #444;
-    border-radius: 5px;
-    padding: 10px;
-    display: none; 
-    flex-direction: column;
-    gap: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 3000; 
-}
-
-#settings-menu button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 14px;
-    width: 100%; 
-}
-
-#settings-menu button:hover {
-    background-color: #0056b3;
-}
-
-.hidden {
-    display: none;
-}
-
-#settings-menu.active {
-    display: flex; 
-}
 
 .toolbar-logo {
     height: 30px; 
