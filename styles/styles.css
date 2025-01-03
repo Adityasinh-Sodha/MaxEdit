@@ -156,9 +156,9 @@ body {
 
 #settings-menu .button-row {
     display: flex;
-    flex-direction: row; 
-    gap: 10px; 
-    justify-content: center; 
+    flex-direction: row; /* Align buttons horizontally */
+    gap: 10px; /* Space between buttons */
+    justify-content: center; /* Center the buttons */
 }
 
 #setting-logo img:hover {
@@ -172,34 +172,34 @@ body {
 
 #theme-selector {
     display: flex;
-    flex-direction: row; 
-    gap: 20px; 
-    justify-content: center; 
+    flex-direction: row; /* Arrange themes horizontally */
+    gap: 20px; /* Add spacing between theme options */
+    justify-content: center; /* Center align themes */
 }
 
 .theme-option {
     display: flex;
-    flex-direction: column; 
-    align-items: center;
+    flex-direction: column; /* Stack image and radio button vertically */
+    align-items: center; /* Center align each theme option */
     text-align: center;
 }
 
 .theme-preview {
-    width: 100px; 
+    width: 100px; /* Adjust image size */
     height: auto;
     border-radius: 8px;
-    margin-bottom: 5px;
+    margin-bottom: 5px; /* Space between image and radio button */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    cursor: pointer; 
+    cursor: pointer; /* Make the image clickable */
     transition: transform 0.2s ease;
 }
 
 .theme-preview:hover {
-    transform: scale(1.1);
+    transform: scale(1.1); /* Slight zoom-in effect on hover */
 }
 
 input[type="radio"] {
-    margin-top: 5px; 
+    margin-top: 5px; /* Space above the radio button */
     cursor: pointer;
 }
     
@@ -219,7 +219,7 @@ input[type="radio"] {
 }
 
 .html-btn:hover {
-    background-color: #0056b3; 
+    background-color: #0056b3; /* Darker blue on hover */
 }
 
 .btn-reset {
@@ -238,7 +238,7 @@ input[type="radio"] {
 }
 
 .btn-reset:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Darker blue on hover */
 }
 
 .editor-controls {
