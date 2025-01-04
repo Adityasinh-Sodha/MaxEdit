@@ -20,7 +20,6 @@ window.addEventListener('mousemove', (e) => {
     if (isResizing) {
         const containerRect = editorContainer.getBoundingClientRect();
 
-        // Update width and height based on mouse position
         editorContainer.style.width = `${e.clientX - containerRect.left}px`;
         editorContainer.style.height = `${e.clientY - containerRect.top}px`;
     }
@@ -36,25 +35,23 @@ window.addEventListener('mouseup', () => {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    const settingLogo = document.getElementById("setting-logo"); // Settings Logo
-    const settingsMenu = document.getElementById("settings-menu"); // Settings Menu
+    const settingLogo = document.getElementById("setting-logo"); 
+    const settingsMenu = document.getElementById("settings-menu"); 
 
-    // Toggle visibility of settings menu when clicking the settings logo
     settingLogo.addEventListener("click", () => {
         if (settingsMenu.classList.contains("hidden")) {
-            settingsMenu.classList.remove("hidden"); // Show settings menu
-            settingsMenu.classList.add("active"); // Activate menu
+            settingsMenu.classList.remove("hidden"); 
+            settingsMenu.classList.add("active"); 
         } else {
-            settingsMenu.classList.add("hidden"); // Hide settings menu
-            settingsMenu.classList.remove("active"); // Deactivate menu
+            settingsMenu.classList.add("hidden"); 
+            settingsMenu.classList.remove("active"); 
         }
     });
 
-    // Close the settings menu when clicking outside of it
     document.addEventListener("click", (event) => {
         if (!settingLogo.contains(event.target) && !settingsMenu.contains(event.target)) {
-            settingsMenu.classList.add("hidden"); // Hide settings menu
-            settingsMenu.classList.remove("active"); // Deactivate menu
+            settingsMenu.classList.add("hidden"); 
+            settingsMenu.classList.remove("active"); 
         }
     });
 });
@@ -150,26 +147,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const themeRadios = document.querySelectorAll('input[name="theme"]');
     const themePreviews = document.querySelectorAll('.theme-preview');
 
-    // Add event listener to each radio button
     themeRadios.forEach((radio) => {
         radio.addEventListener("change", () => {
             const selectedTheme = radio.value;
 
-            // Apply the selected theme
-            document.body.className = ""; // Remove existing theme classes
+            
+            document.body.className = ""; 
             document.body.classList.add(selectedTheme);
         });
     });
 
-    // Add click event to each theme preview image
     themePreviews.forEach((preview) => {
         preview.addEventListener("click", () => {
-            const parent = preview.parentElement; // Get the parent .theme-option
-            const radio = parent.querySelector('input[name="theme"]'); // Get associated radio button
+            const parent = preview.parentElement; 
+            const radio = parent.querySelector('input[name="theme"]'); 
 
             if (radio) {
-                radio.checked = true; // Select the radio button
-                radio.dispatchEvent(new Event("change")); // Trigger the change event
+                radio.checked = true; 
+                radio.dispatchEvent(new Event("change")); 
             }
         });
     });
@@ -304,17 +299,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const divider = document.querySelector(".divider");
     let toggleBtn = document.getElementById("toggle-btn");
 
-    // Function to ensure buttons exist
     function ensureButtons() {
-        // Ensure the toggle button exists
         if (!toggleBtn) {
             toggleBtn = document.createElement("button");
             toggleBtn.id = "toggle-btn";
-            toggleBtn.textContent = "-"; // Default state for minimize
+            toggleBtn.textContent = "-"; 
             toggleBtn.style.marginLeft = "10px";
         }
 
-        // Ensure buttons container exists
         let buttonsContainer = document.querySelector(".preview-buttons");
         if (!buttonsContainer) {
             buttonsContainer = document.createElement("div");
@@ -327,11 +319,10 @@ document.addEventListener("DOMContentLoaded", () => {
             preview.appendChild(buttonsContainer);
         }
 
-        // Ensure the close button exists
         if (!buttonsContainer.querySelector(".close-btn")) {
             const closeButton = document.createElement("button");
             closeButton.className = "close-btn";
-            closeButton.textContent = "×"; // Close button
+            closeButton.textContent = "×";
             closeButton.style.backgroundColor = "red";
             closeButton.style.color = "white";
             closeButton.style.border = "none";
@@ -341,24 +332,20 @@ document.addEventListener("DOMContentLoaded", () => {
             closeButton.style.cursor = "pointer";
             closeButton.style.fontSize = "18px";
             closeButton.addEventListener("click", () => {
-                editorContainer.style.display = "none"; // Hide the editor-container
+                editorContainer.style.display = "none";
             });
             buttonsContainer.appendChild(closeButton);
         }
 
-        // Ensure the toggle button is in the buttons container
         if (!buttonsContainer.contains(toggleBtn)) {
             buttonsContainer.appendChild(toggleBtn);
         }
     }
 
-    // Call ensureButtons once on load
     ensureButtons();
 
-    // Toolbar height
     const toolbarHeight = toolbar.offsetHeight;
 
-    // Function to maximize editor
     function maximizeEditor() {
         editorContainer.style.position = "fixed";
         editorContainer.style.top = `${toolbarHeight}px`;
@@ -375,19 +362,15 @@ document.addEventListener("DOMContentLoaded", () => {
         markdownInput.style.height = "100%";
         preview.style.height = "100%";
 
-        document.body.style.overflow = "hidden"; // Prevent background scrolling
-        toggleBtn.textContent = "-"; // Set to minimize
+        document.body.style.overflow = "hidden"; 
+        toggleBtn.textContent = "-"; 
     }
 
-    // Initially maximize editor
-    maximizeEditor();
 
-    // Toggle button functionality
     toggleBtn.addEventListener("click", () => {
         const isMaximized = toggleBtn.textContent === "-";
 
         if (isMaximized) {
-            // Minimize editor
             editorContainer.style.position = "relative";    
             editorContainer.style.width = "60%";
             editorContainer.style.height = "70%";
@@ -408,7 +391,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Divider resizing functionality
     let isResizing = false;
     divider.addEventListener("mousedown", () => {
         isResizing = true;
@@ -476,12 +458,11 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
     const markdownInput = document.getElementById("markdown-input");
     const preview = document.getElementById("preview");
-    const settingsMenu = document.getElementById("settings-menu"); // Access the settings menu
-    const copyButton = document.getElementById("copy-btn"); // Access the Copy HTML button
+    const settingsMenu = document.getElementById("settings-menu"); 
+    const copyButton = document.getElementById("copy-btn"); 
 
     const LOCAL_STORAGE_KEY = "editorContent";
 
-    // Load saved content from localStorage
     const savedContent = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (savedContent) {
         markdownInput.innerText = savedContent; 
@@ -489,7 +470,6 @@ document.addEventListener("DOMContentLoaded", () => {
         preview.innerHTML = marked.parse(sanitizedContent); 
     }
 
-    // Handle input event for live preview and save
     markdownInput.addEventListener("input", () => {
         const content = markdownInput.innerText;
         const sanitizedContent = DOMPurify.sanitize(content); 
@@ -497,19 +477,16 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem(LOCAL_STORAGE_KEY, content); 
     });
 
-    // Create the reset button
     const resetButton = document.createElement("button");
     resetButton.textContent = "Reset MaxEdit";
-    resetButton.classList.add("btn-reset"); // Add the reset-specific CSS class
+    resetButton.classList.add("btn-reset"); 
 
-    // Reset button functionality
     resetButton.addEventListener("click", () => {
-        localStorage.removeItem(LOCAL_STORAGE_KEY); // Clear local storage
-        markdownInput.innerText = ""; // Clear the editor
-        preview.innerHTML = ""; // Clear the preview
+        localStorage.removeItem(LOCAL_STORAGE_KEY);
+        markdownInput.innerText = ""; 
+        preview.innerHTML = ""; 
     });
 
-    // Insert the reset button after the Copy HTML button
     if (copyButton) {
         copyButton.insertAdjacentElement("afterend", resetButton);
     }
@@ -604,4 +581,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const toggleBtn = document.getElementById("toggle-btn");
+
+    toggleBtn?.click();
 });
