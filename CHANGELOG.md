@@ -73,3 +73,23 @@
 ### 3. known_issues:
     
 - The syntax highlighting is not working when the code load contant from local storage.
+
+# [MaxEdit v2.5 - 04/Jan 2024](https://github.com/Adityasinh-Sodha/MaxEdit/releases/tag/v2.5)
+
+## changes: 
+  
+### 1. added:
+
+- Added a setting menu separately   
+- Discovered bugs are now fixed.
+- Make editor freely Moveable and Resizable.
+- Added a button of Minimize and Maximize editors 
+
+### 2. fixed:
+    
+- No Updates
+  
+### 3. known_issues:
+    
+- The syntax highlighting and word count is not working when the code load contant from local storage.
+- Editor is also resize when the dragging process is runnning
