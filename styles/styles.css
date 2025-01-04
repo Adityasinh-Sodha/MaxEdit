@@ -156,9 +156,9 @@ body {
 
 #settings-menu .button-row {
     display: flex;
-    flex-direction: row; /* Align buttons horizontally */
-    gap: 10px; /* Space between buttons */
-    justify-content: center; /* Center the buttons */
+    flex-direction: row; 
+    gap: 10px; 
+    justify-content: center; 
 }
 
 #setting-logo img:hover {
@@ -172,34 +172,34 @@ body {
 
 #theme-selector {
     display: flex;
-    flex-direction: row; /* Arrange themes horizontally */
-    gap: 20px; /* Add spacing between theme options */
-    justify-content: center; /* Center align themes */
+    flex-direction: row;
+    gap: 20px; 
+    justify-content: center;
 }
 
 .theme-option {
     display: flex;
-    flex-direction: column; /* Stack image and radio button vertically */
-    align-items: center; /* Center align each theme option */
+    flex-direction: column; 
+    align-items: center; 
     text-align: center;
 }
 
 .theme-preview {
-    width: 100px; /* Adjust image size */
+    width: 100px; 
     height: auto;
     border-radius: 8px;
-    margin-bottom: 5px; /* Space between image and radio button */
+    margin-bottom: 5px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    cursor: pointer; /* Make the image clickable */
+    cursor: pointer; 
     transition: transform 0.2s ease;
 }
 
 .theme-preview:hover {
-    transform: scale(1.1); /* Slight zoom-in effect on hover */
+    transform: scale(1.1); 
 }
 
 input[type="radio"] {
-    margin-top: 5px; /* Space above the radio button */
+    margin-top: 5px; 
     cursor: pointer;
 }
     
@@ -219,7 +219,7 @@ input[type="radio"] {
 }
 
 .html-btn:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3; 
 }
 
 .btn-reset {
@@ -238,7 +238,7 @@ input[type="radio"] {
 }
 
 .btn-reset:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3; 
 }
 
 .editor-controls {
@@ -295,7 +295,7 @@ input[type="radio"] {
 .toolbar-right {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 0px;
     justify-content: flex-end;
 }
 
