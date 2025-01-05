@@ -6,56 +6,24 @@ const wordCountDiv = document.getElementById('word-count');
 const gearBtn = document.getElementById('gear-btn');
 const settingsMenu = document.getElementById('settings-menu');
 const editorContainer = document.querySelector('.editor-container');
-const divider = document.querySelector(".divider");
-let isResizing = false;
-
-editorContainer.addEventListener('mousedown', (e) => {
-    if (e.target === editorContainer) {
-        isResizing = true;
-        editorContainer.classList.add('resizing');
-    }
-});
-
-window.addEventListener('mousemove', (e) => {
-    if (isResizing) {
-        const containerRect = editorContainer.getBoundingClientRect();
-
-        editorContainer.style.width = `${e.clientX - containerRect.left}px`;
-        editorContainer.style.height = `${e.clientY - containerRect.top}px`;
-    }
-});
-
-window.addEventListener('mouseup', () => {
-    if (isResizing) {
-        isResizing = false;
-        editorContainer.classList.remove('resizing');
-    }
-});
 
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    const settingLogo = document.getElementById("setting-logo"); 
-    const settingsMenu = document.getElementById("settings-menu"); 
+    const gearBtn = document.getElementById("gear-btn");
+    const settingsMenu = document.getElementById("settings-menu");
 
-    settingLogo.addEventListener("click", () => {
-        if (settingsMenu.classList.contains("hidden")) {
-            settingsMenu.classList.remove("hidden"); 
-            settingsMenu.classList.add("active"); 
-        } else {
-            settingsMenu.classList.add("hidden"); 
-            settingsMenu.classList.remove("active"); 
-        }
+    gearBtn.addEventListener("click", () => {
+        settingsMenu.classList.toggle("active");
     });
 
-    document.addEventListener("click", (event) => {
-        if (!settingLogo.contains(event.target) && !settingsMenu.contains(event.target)) {
-            settingsMenu.classList.add("hidden"); 
-            settingsMenu.classList.remove("active"); 
+   
+    document.addEventListener("click", (e) => {
+        if (!gearBtn.contains(e.target) && !settingsMenu.contains(e.target)) {
+            settingsMenu.classList.remove("active");
         }
     });
 });
-
 
 function saveCaretPosition(el) {
     const selection = window.getSelection();
@@ -143,33 +111,50 @@ copyBtn.addEventListener('click', () => {
     });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-    const themeRadios = document.querySelectorAll('input[name="theme"]');
-    const themePreviews = document.querySelectorAll('.theme-preview');
 
-    themeRadios.forEach((radio) => {
-        radio.addEventListener("change", () => {
-            const selectedTheme = radio.value;
 
-            
-            document.body.className = ""; 
-            document.body.classList.add(selectedTheme);
-        });
-    });
-
-    themePreviews.forEach((preview) => {
-        preview.addEventListener("click", () => {
-            const parent = preview.parentElement; 
-            const radio = parent.querySelector('input[name="theme"]'); 
-
-            if (radio) {
-                radio.checked = true; 
-                radio.dispatchEvent(new Event("change")); 
-            }
-        });
-    });
+const themeSelector = document.getElementById('theme-selector');
+document.body.classList.add('dark-blue-theme');
+themeSelector.value = 'dark-blue-theme';
+themeSelector.addEventListener('change', (e) => {
+    const selectedTheme = e.target.value;
+    document.body.className = '';
+    
+    if (selectedTheme !== 'default') {
+        document.body.classList.add(selectedTheme);
+    }
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+    const toolbar = document.querySelector(".top-toolbar"); // Toolbar element
+    const toolbarHeight = toolbar ? toolbar.offsetHeight : 0; // Get the height of the toolbar
+
+    // Set editor container to full screen, below the toolbar
+    const editorContainer = document.querySelector('.editor-container');
+    editorContainer.style.position = "fixed";
+    editorContainer.style.top = `${toolbarHeight}px`; // Push down below the toolbar
+    editorContainer.style.left = "0";
+    editorContainer.style.width = "100vw";
+    editorContainer.style.height = `calc(100vh - ${toolbarHeight}px)`; // Adjust height to avoid toolbar overlap
+    editorContainer.style.display = "flex"; // Use flexbox for 50/50 layout
+    editorContainer.style.margin = "0";
+    editorContainer.style.padding = "0";
+    editorContainer.style.zIndex = "1000";
+
+    // Style markdown input and preview for 50/50 split
+    const markdownInput = document.getElementById('markdown-input');
+    const preview = document.getElementById('preview');
+
+    markdownInput.style.width = "50%";
+    markdownInput.style.height = "100%";
+    markdownInput.style.overflowY = "auto"; // Add scroll if content exceeds height
+
+    preview.style.width = "50%";
+    preview.style.height = "100%";
+    preview.style.overflowY = "auto"; // Add scroll for the preview
+});
+
+ // UPDATE FROM HERE
 
 document.addEventListener("DOMContentLoaded", () => {
     const markdownInput = document.getElementById("markdown-input");
@@ -289,8 +274,6 @@ Developed by **Adityasinh**.
     updatePreview();
 });
 
-
-
 document.addEventListener("DOMContentLoaded", () => {
     const editorContainer = document.querySelector(".editor-container");
     const markdownInput = document.getElementById("markdown-input");
@@ -299,99 +282,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const divider = document.querySelector(".divider");
     let toggleBtn = document.getElementById("toggle-btn");
 
-    function ensureButtons() {
-        if (!toggleBtn) {
-            toggleBtn = document.createElement("button");
-            toggleBtn.id = "toggle-btn";
-            toggleBtn.textContent = "-"; 
-            toggleBtn.style.marginLeft = "10px";
-        }
-
-        let buttonsContainer = document.querySelector(".preview-buttons");
-        if (!buttonsContainer) {
-            buttonsContainer = document.createElement("div");
-            buttonsContainer.className = "preview-buttons";
-            buttonsContainer.style.position = "absolute";
-            buttonsContainer.style.top = "10px";
-            buttonsContainer.style.right = "10px";
-            buttonsContainer.style.display = "flex";
-            buttonsContainer.style.gap = "10px";
-            preview.appendChild(buttonsContainer);
-        }
-
-        if (!buttonsContainer.querySelector(".close-btn")) {
-            const closeButton = document.createElement("button");
-            closeButton.className = "close-btn";
-            closeButton.textContent = "×";
-            closeButton.style.backgroundColor = "red";
-            closeButton.style.color = "white";
-            closeButton.style.border = "none";
-            closeButton.style.borderRadius = "50%";
-            closeButton.style.width = "32px";
-            closeButton.style.height = "32px";
-            closeButton.style.cursor = "pointer";
-            closeButton.style.fontSize = "18px";
-            closeButton.addEventListener("click", () => {
-                editorContainer.style.display = "none";
-            });
-            buttonsContainer.appendChild(closeButton);
-        }
-
-        if (!buttonsContainer.contains(toggleBtn)) {
-            buttonsContainer.appendChild(toggleBtn);
-        }
-    }
-
-    ensureButtons();
-
-    const toolbarHeight = toolbar.offsetHeight;
-
-    function maximizeEditor() {
-        editorContainer.style.position = "fixed";
-        editorContainer.style.top = `${toolbarHeight}px`;
-        editorContainer.style.left = "0";
-        editorContainer.style.width = "100vw";
-        editorContainer.style.height = `calc(100vh - ${toolbarHeight}px)`;
-        editorContainer.style.margin = "0";
-        editorContainer.style.padding = "0";
-        editorContainer.style.zIndex = "1000";
-
-        markdownInput.style.width = "50%";
-        preview.style.width = "50%";
-
-        markdownInput.style.height = "100%";
-        preview.style.height = "100%";
-
-        document.body.style.overflow = "hidden"; 
-        toggleBtn.textContent = "-"; 
-    }
-
-
-    toggleBtn.addEventListener("click", () => {
-        const isMaximized = toggleBtn.textContent === "-";
-
-        if (isMaximized) {
-            editorContainer.style.position = "relative";    
-            editorContainer.style.width = "60%";
-            editorContainer.style.height = "70%";
-            editorContainer.style.margin = "auto";
-            editorContainer.style.padding = "20px";
-            editorContainer.style.zIndex = "";
-
-            markdownInput.style.width = "50%";
-            preview.style.width = "50%";
-
-            markdownInput.style.height = "100%";
-            preview.style.height = "100%";
-
-            document.body.style.overflow = ""; 
-            toggleBtn.textContent = "☐"; 
-        } else {
-            maximizeEditor(); 
-        }
-    });
-
-    let isResizing = false;
+let isResizing = false;
     divider.addEventListener("mousedown", () => {
         isResizing = true;
         document.body.style.cursor = "ew-resize"; 
@@ -458,11 +349,12 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
     const markdownInput = document.getElementById("markdown-input");
     const preview = document.getElementById("preview");
-    const settingsMenu = document.getElementById("settings-menu"); 
-    const copyButton = document.getElementById("copy-btn"); 
+    const settingsMenu = document.getElementById("settings-menu"); // Access the settings menu
+    const copyButton = document.getElementById("copy-btn"); // Access the Copy HTML button
 
     const LOCAL_STORAGE_KEY = "editorContent";
 
+    // Load saved content from localStorage
     const savedContent = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (savedContent) {
         markdownInput.innerText = savedContent; 
@@ -470,6 +362,7 @@ document.addEventListener("DOMContentLoaded", () => {
         preview.innerHTML = marked.parse(sanitizedContent); 
     }
 
+    // Handle input event for live preview and save
     markdownInput.addEventListener("input", () => {
         const content = markdownInput.innerText;
         const sanitizedContent = DOMPurify.sanitize(content); 
@@ -477,114 +370,21 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem(LOCAL_STORAGE_KEY, content); 
     });
 
+    // Create the reset button
     const resetButton = document.createElement("button");
     resetButton.textContent = "Reset MaxEdit";
-    resetButton.classList.add("btn-reset"); 
+    resetButton.classList.add("btn-reset"); // Add the reset-specific CSS class
 
+    // Reset button functionality
     resetButton.addEventListener("click", () => {
-        localStorage.removeItem(LOCAL_STORAGE_KEY);
-        markdownInput.innerText = ""; 
-        preview.innerHTML = ""; 
+        localStorage.removeItem(LOCAL_STORAGE_KEY); // Clear local storage
+        markdownInput.innerText = ""; // Clear the editor
+        preview.innerHTML = ""; // Clear the preview
     });
 
+    // Insert the reset button after the Copy HTML button
     if (copyButton) {
         copyButton.insertAdjacentElement("afterend", resetButton);
     }
 });
 
-
-document.addEventListener("DOMContentLoaded", () => {
-    const editorContainer = document.querySelector(".editor-container");
-    const markdownInput = document.getElementById("markdown-input");
-    const preview = document.getElementById("preview");
-    const divider = document.querySelector(".divider");
-
-    let isResizing = false; 
-    let isDragging = false; 
-    let offsetX = 0; 
-    let offsetY = 0; 
-
-  
-    divider.addEventListener("mousedown", (e) => {
-        if (!isDragging) { 
-            isResizing = true;
-            document.body.style.cursor = "ew-resize"; 
-        }
-    });
-
-    document.addEventListener("mousemove", (e) => {
-        if (isResizing && !isDragging) {
-            const containerRect = editorContainer.getBoundingClientRect();
-            const newEditorWidth = ((e.clientX - containerRect.left) / containerRect.width) * 100;
-            const newPreviewWidth = 100 - newEditorWidth;
-
-            if (newEditorWidth > 10 && newEditorWidth < 90) {
-                markdownInput.style.width = `${newEditorWidth}%`;
-                preview.style.width = `${newPreviewWidth}%`;
-            }
-        }
-    });
-
-    document.addEventListener("mouseup", () => {
-        if (isResizing) {
-            isResizing = false;
-            document.body.style.cursor = ""; 
-        }
-    });
-
-    divider.addEventListener("mousedown", (e) => {
-        const dividerRect = divider.getBoundingClientRect();
-        const middleY = dividerRect.top + dividerRect.height / 2;
-        const pointerY = e.clientY;
-
-        if (Math.abs(pointerY - middleY) < 10) { 
-            isDragging = true;
-
-            const rect = editorContainer.getBoundingClientRect();
-            offsetX = e.clientX - rect.left;
-            offsetY = e.clientY - rect.top;
-
-            document.body.style.cursor = "move";
-        }
-    });
-
-    document.addEventListener("mousemove", (e) => {
-        if (isDragging) {
-            const newLeft = e.clientX - offsetX;
-            const newTop = e.clientY - offsetY;
-
-            editorContainer.style.position = "absolute";
-            editorContainer.style.left = `${newLeft}px`;
-            editorContainer.style.top = `${newTop}px`;
-        }
-    });
-
-    document.addEventListener("mouseup", () => {
-        if (isDragging) {
-            isDragging = false;
-            document.body.style.cursor = ""; 
-        }
-    });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-    const editorContainer = document.querySelector(".editor-container");
-    const maxEditLogo = document.getElementById("maxedit-logo");
-
-    maxEditLogo.addEventListener("click", () => {
-        if (editorContainer.style.display === "none") {
-            editorContainer.style.display = "flex"; 
-            editorContainer.style.visibility = "visible"; 
-            const preview = document.getElementById("preview");
-            if (preview) {
-                preview.style.display = "block"; 
-            }
-        }
-    });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-    const toggleBtn = document.getElementById("toggle-btn");
-
-    toggleBtn?.click();
-});
