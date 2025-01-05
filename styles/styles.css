@@ -6,239 +6,9 @@ body {
     flex-direction: column;
     align-items: center;
     height: 100vh;
-    background: url('../assets/background.png') no-repeat center center/cover;
     color: #333;
-    transition: background-color 0.3s, color 0.3s;
     overflow: hidden;
     padding-top: 60px;
-}
-
-#maxedit-logo {
-    position: absolute; 
-    top: 75px; 
-    left: 40px; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 300; 
-    transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-#maxedit-logo img {
-    width: 50px;
-    cursor: pointer;
-    height: auto;
-    border-radius: 50%; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-#maxedit-logo img:hover {
-    transform: scale(1.1); /
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-}
-
-#maxedit-logo .logo-name {
-    margin-top: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #fff;
-    text-align: center;
-    text-shadow: 
-        1px 1px 2px black,  
-        -1px 1px 2px black, 
-        1px -1px 2px black, 
-        -1px -1px 2px black; 
-}
-
-
-#setting-logo {
-    position: absolute; 
-    top: 180px; 
-    left: 40px; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 300; 
-    transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-#setting-logo img {
-    cursor: pointer;
-    height: auto;
-    border-radius: 50%; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-#setting-logo img:hover {
-    transform: scale(1.1); 
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-}
-
-#setting-logo .logo-name {
-    margin-top: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #fff;
-    text-align: center;
-     text-shadow: 
-        1px 1px 2px black,  
-        -1px 1px 2px black, 
-        1px -1px 2px black, 
-        -1px -1px 2px black; 
-}
-
-
-#settings-menu {
-    position: absolute;
-    top: 180px; 
-    left: 100px; 
-    width: 400px; 
-    height: auto; 
-    background-color: rgba(255, 255, 255, 0.3);
-    color: #fff;
-    padding: 15px; 
-    display: none; 
-    align-items: center;
-    flex-direction: column;
-    border-radius: 15px;
-    gap: 15px; 
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(20px);
-    z-index: 3000;
-}
-
-#settings-menu.active {
-    display: flex; 
-    flex-direction: column; 
-}
-
-
-#settings-menu button {
-    display: inline-block;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 10px; 
-    cursor: pointer;
-    font-size: 14px;
-    width: auto;
-}
-
-#settings-menu button:hover {
-    background-color: #0056b3;
-}
-
-#settings-menu select {
-    width: 100%; 
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #444;
-    background-color: #1a1a1a;
-    color: #fff;
-    font-size: 14px;
-    outline: none;
-}
-
-#settings-menu select:hover {
-    background-color: #333;
-}
-
-#settings-menu #word-count {
-    font-size: 12px;
-    color: #ccc;
-    text-align: center;
-}
-
-#settings-menu .button-row {
-    display: flex;
-    flex-direction: row; /* Align buttons horizontally */
-    gap: 10px; /* Space between buttons */
-    justify-content: center; /* Center the buttons */
-}
-
-#setting-logo img:hover {
-    transform: scale(1.2);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
-}
-
-.hidden {
-    display: none;
-}
-
-#theme-selector {
-    display: flex;
-    flex-direction: row; /* Arrange themes horizontally */
-    gap: 20px; /* Add spacing between theme options */
-    justify-content: center; /* Center align themes */
-}
-
-.theme-option {
-    display: flex;
-    flex-direction: column; /* Stack image and radio button vertically */
-    align-items: center; /* Center align each theme option */
-    text-align: center;
-}
-
-.theme-preview {
-    width: 100px; /* Adjust image size */
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 5px; /* Space between image and radio button */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    cursor: pointer; /* Make the image clickable */
-    transition: transform 0.2s ease;
-}
-
-.theme-preview:hover {
-    transform: scale(1.1); /* Slight zoom-in effect on hover */
-}
-
-input[type="radio"] {
-    margin-top: 5px; /* Space above the radio button */
-    cursor: pointer;
-}
-    
-.html-btn {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 6px 12px; 
-    cursor: pointer;
-    font-size: 12px; 
-    width: auto; 
-    height: auto; 
-    max-width: 100px; 
-    text-align: center; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
-}
-
-.html-btn:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-}
-
-.btn-reset {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 6px 12px; 
-    cursor: pointer;
-    font-size: 12px; 
-    width: auto; 
-    height: auto; 
-    max-width: 100px; 
-    text-align: center; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
-}
-
-.btn-reset:hover {
-    background-color: #0056b3; /* Darker blue on hover */
 }
 
 .editor-controls {
@@ -256,14 +26,24 @@ input[type="radio"] {
     background-color: #007bff;
     color: white;
     cursor: pointer;
-    transition: background-color 0.3s;
 }
 
 .editor-controls button:hover {
     background-color: #0056b3;
 }
 
-
+.editor-container.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    z-index: 1000;
+    display: flex;
+    background-color: #fff; 
+}
 
 #markdown-input {
     background-color: #ffffff; 
@@ -288,6 +68,20 @@ input[type="radio"] {
     justify-content: flex-end;
 }
 
+#toggle-btn {
+    padding: 5px 15px;
+    font-size: 14px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    order: 1; 
+}
+
+#toggle-btn:hover {
+    background-color: #0056b3;
+}
 
 .editor-container.minimized {
     width: 90%;
@@ -307,8 +101,7 @@ input[type="radio"] {
 }
 
 .editor-container {
-    position: absolute;
-    user-select: none;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -377,7 +170,7 @@ input[type="radio"] {
     position: relative; 
     display: flex;
     align-items: center;
-    gap: 0px;
+    gap: 10px;
     justify-content: flex-end;
     margin-right: 20px;
 }
@@ -394,8 +187,56 @@ input[type="radio"] {
     flex: 1;
 }
 
+#gear-btn {
+    height: 30px;
+    cursor: pointer;
+    order: 2;
+}
+
+#toggle-btn:hover,
+#gear-btn:hover {
+    background-color: #0056b3;
+}
 
 
+#settings-menu {
+    position: absolute;
+    top: 40px; 
+    right: 0; 
+    background-color: #000000;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 5px;
+    padding: 10px;
+    display: none; 
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 3000; 
+}
+
+#settings-menu button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100%; 
+}
+
+#settings-menu button:hover {
+    background-color: #0056b3;
+}
+
+.hidden {
+    display: none;
+}
+
+#settings-menu.active {
+    display: flex; 
+}
 
 .toolbar-logo {
     height: 30px; 
@@ -531,8 +372,8 @@ body.dark-theme pre[class*="language-"] {
 
 
 .dark-theme {
-    background-color: #1e1e1e;
-    color: #e0e0e0;
+    background-color: #333;
+    color: #fff;
 }
 
 .dark-theme textarea,
@@ -603,8 +444,8 @@ body.dark-theme pre[class*="language-"] {
 
 body.dark-theme #markdown-input,
 body.dark-theme #preview {
-    background-color: #2b2b2b; 
-    color: #f0f0f0;
+    background: #555; 
+    color: #fff; 
 }
         
 
@@ -625,6 +466,7 @@ body.dark-blue-theme #preview {
     color: #cfd8e3;
 }
 
+
 .divider {
     width: 4px; 
     height: 100%; 
@@ -634,18 +476,6 @@ body.dark-blue-theme #preview {
      background-color: #ccc; 
 }
 
-.divider::before {
-    content: "";
-    position: absolute;
-    top: 50%; 
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 20px; 
-    height: 10px; 
-    background-color: #aaa; 
-    cursor: move; 
-    border-radius: 5px; 
-}
 
 body:not(.dark-theme) .divider {
     background-color: #ddd; 
@@ -655,78 +485,3 @@ body:not(.dark-theme) .divider {
 body.dark-theme .divider {
     background-color: #ffffff; 
 }
-
-body.dark-blue-theme #preview th {
-    background-color: #1a2b4f; 
-    color: #cfd8e3; 
-}
-
-body.dark-blue-theme #preview td {
-    background-color: #243b5c; 
-    color: #cfd8e3; 
-}
-
-body.dark-blue-theme #preview pre {
-    background-color: #2e2e3e;
-    color: #cfd8e3; 
-    border-radius: 5px; 
-    padding: 10px; 
-}
-
-.preview-buttons {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    display: flex;
-    gap: 10px;  
-    z-index: 1000;
-}
-
-.close-btn {
-    background-color: red !important;
-    color: white !important;
-    border: none;
-    border-radius: 50%;
-    font-size: 18px;
-    font-weight: bold;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    order: 2;
-}
-
-.close-btn:hover {
-    background-color: darkred !important;
-}
-
-#toggle-btn {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 50%; 
-    font-size: 18px;
-    font-weight: bold;
-    width: 32px;
-    height: 32px; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    order: 1;
-}
-
-#toggle-btn:hover {
-    background-color: #0056b3;
-}
-
-.text {
-    font-family: 'Impact', sans-serif;
-    font-size: 24px; 
-    text-align: center;
-}
-
