@@ -13,9 +13,8 @@
     <script src="scripts/prism-markdown.min.js"></script>
     <script src="scripts/marked.min.js"></script>
     <script src="scripts/purify.min.js"></script>
-
 </head>
-<body class="dark-blue-theme">
+<body class="dark-theme">
 <div class="top-toolbar">
     <div class="toolbar-left">
         <a href="https://bento.me/adityasinh" target="_blank">
@@ -23,77 +22,37 @@
         </a>
         <a href="https://bento.me/adityasinh" target="_blank" class="toolbar-link"><b>Adityasinh Sodha</b></a>
     </div>
-
     <div class="toolbar-center">
-    <p class="text" id="text"><b>MaxEdit</b></p>
-</div>
-
-
-    <div class="toolbar-right">
-        <a href="https://github.com/Adityasinh-Sodha/MaxEdit/" target="_blank">
+        <a href="https://github.com/Adityasinh-Sodha" target="_blank">
             <img src="assets/github-mark-white.png" alt="GitHub Logo" class="toolbar-logo">
         </a>
-        <a href="https://gitlab.com/Adityasinh-Sodha/MaxEdit/" target="_blank">
+        <a href="https://gitlab.com/Adityasinh-Sodha" target="_blank">
             <img src="assets/gitlab-mark-white.png" alt="GitLab Logo" class="toolbar-logo">
         </a>
-        <a href="https://codepen.io/Adityasinh-Sodha/pen/vYowzNP" target="_blank">
+        <a href="https://codepen.io/Adityasinh-Sodha" target="_blank">
             <img src="assets/codepen-mark-white.png" alt="Codepen Logo" class="toolbar-logo">
         </a>
     </div>
-
-</div>
-
-   <div class="editor-container">
-    <div class="drag-handle"></div>
-    <div id="markdown-input" contenteditable="true" placeholder="Write your Markdown here..."></div>
-    <div class="divider"></div>
-    <div id="preview">
-            <button class="close-btn">&times;</button>
-</div>
-
-</div>
-
-<div id="maxedit-logo">
-    <img src="assets/maxedit.ico" alt="Project Logo">
-    <div class="logo-name">MaxEdit</div>
-</div>
-
-<div id="setting-logo">
-    <img src="assets/setting.svg" alt="Settings Icon">
-    <div class="logo-name">Settings</div>
-</div>
-
-<div id="settings-menu" class="hidden">
-   <div class="button-row">
-    <button id="copy-btn" class="html-btn">Copy HTML</button>
-   
-</div>
-
-    <div id="theme-selector">
-        <div class="theme-option">
-            <img src="assets/darkblue.png" alt="Dark Blue Theme" class="theme-preview">
-            <label>
-                <input type="radio" name="theme" value="dark-blue-theme">
-                Dark Blue
-            </label>
-        </div>
-        <div class="theme-option">
-            <img src="assets/white.png" alt="White Theme" class="theme-preview">
-            <label>
-                <input type="radio" name="theme" value="default">
-                White
-            </label>
-        </div>
-        <div class="theme-option">
-            <img src="assets/dark.png" alt="Dark Theme" class="theme-preview">
-            <label>
-                <input type="radio" name="theme" value="dark-theme">
-                Dark
-            </label>
+  <div class="toolbar-right">
+        <img src="assets/gear.png" alt="image" id="gear-btn" class="toolbar-logo">
+        <div id="settings-menu" class="hidden">
+            <button id="copy-btn">HTML</button>
+             <select id="theme-selector">
+                <option value="dark-blue-theme">Dark Blue Theme</option>
+        <option value="default">White Theme</option>
+        <option value="dark-theme">Dark Theme</option>
+        
+    </select>
+            <div id="word-count">Word Count: 0</div>
         </div>
     </div>
 
-    <div id="word-count">Word Count: 0</div>
+</div>
+
+    <div class="editor-container">
+    <div id="markdown-input" contenteditable="true" placeholder="Write your Markdown here..."></div>
+    <div class="divider"></div>
+    <div id="preview"></div>
 </div>
 
     <script src="scripts/script.js"></script>
